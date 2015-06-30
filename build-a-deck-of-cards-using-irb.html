@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Building a Deck of Playing Cards in Ruby, the clean and easy way — Ruby on Rails Guides</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemesGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">More from <a href="http://rubymentor.io">RubyMentor</a>:</strong>
+      <ul class="more-info-links xs-hidden">
+        <li class="more-info"><a href="http://codementor.io/rubymentor" alt="Hourly Expert Ruby Mentorship">
+          Get Expert Help NOW</a></li>
+        <li class="more-info"><a href="http://rubymentor.io/plans" alt="Want a more personal and direct technology education?">
+          Monthly Mentorship Plans</a></li>
+        <li class="more-info"><a href="http://rubylive.tv" alt="Watch REAL Ruby get coded before your eyes!">
+          Watch Ruby coded LIVE!</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1 class="hidden-xs"><a href="index.html" title="Return to home page">homepage</a></h1>
+      <ul class="nav">
+        <li class="guides-index guides-index-large">
+          <a href="index.html" id="guidesMenu" class="guides-index-item nav-item">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Games in Ruby</dt>
+                <dd><a href="build-a-deck-of-cards-using-irb.html">Build a deck of cards using IRB</a></dd>
+              </dl>
+              <dl class="R">
+              </dl>
+          </div>
+        </li>
+        <li class="hidden-xs">&nbsp;</li>
+        <li class="guides-index guides-index-small">
+          <select class="guides-index-item nav-item">
+            <option value="index.html">Guides Index</option>
+              <optgroup label="Games in Ruby">
+                  <option value="build-a-deck-of-cards-using-irb.html">Build a deck of cards using IRB</option>
+              </optgroup>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Building a Deck of Playing Cards in Ruby, the clean and easy way</h2><p>In this video you will learn how to:</p>
+<ul>
+<li>Use IRB as an immediate feedback loop</li>
+<li>Create symbol shortcut arrays</li>
+<li>Use <code>map</code> to transform an array</li>
+<li>Use <code>flat_map</code> to transform and flatten</li>
+<li>Creating simple obects with <code>Struct</code></li>
+<li>Create <code>value</code> objects</li>
+</ul>
+
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.png" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li><a href="#repl-driven-development">REPL Driven Development</a></li>
+<li><a href="#what-the-hell-is-a-repl-questionmark">What the hell is a REPL?</a></li>
+<li><a href="#representing-the-ranks">Representing the RANKS</a></li>
+<li><a href="#representing-the-suits">Representing the SUITS</a></li>
+<li><a href="#arrays-and-map">Arrays and map</a></li>
+<li><a href="#using-irb-to-test-drive">Using IRB to "test drive"</a></li>
+<li><a href="#generating-52-cards">Generating 52 cards</a></li>
+<li><a href="#matrices-and-flat-map">Matrices and flat_map</a></li>
+<li><a href="#printing-the-card-value">Printing the card value</a></li>
+<li><a href="#make-it-a-value-object">Make it a value object</a></li>
+<li><a href="#shuffling-the-cards">Shuffling the cards</a></li>
+</ol>
+
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="repl-driven-development">1.) REPL Driven Development</h3><p>You have probably heard of Test Driven Development, well REPL Driven Development
+is a good friend of TDD. Whereas Test Driven Development is there to drive the
+design of the interface of your code, and then leave you with a suit of automated
+tests, RDD is there to be in the front lines in figuring out what the hell you 
+should be writing in the first place.</p><p>But wait! What the hell is <code>REPL</code>? Ok, ok, let me back up just a moment.</p><h3 id="what-the-hell-is-a-repl-questionmark">2.) What the hell is a REPL?</h3><p>A REPL (there, I said it AGAIN without telling you what it is 😜 ) stands for</p>
+<ul>
+<li>Read</li>
+<li>Evaluate</li>
+<li>Print</li>
+<li>Loop</li>
+</ul>
+<p>Imagine this, you are sitting at a card table. The Dealer pulls a card from
+the top of the deck (Read), they then slide it to you (Evaluate), you read it
+(Print), and then the game repeats (Loop).</p><div class="note"><p>When you see <code>$</code> in grey sections, it  represents your 'prompt' and
+you shouldn't copy or paste it into the Terminal</p></div><div class="info"><p>On OSX: press <code>cmd-space</code> and then start typing 'term' and hit enter when
+you see it match the icon.</p></div><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ irb
+
+</pre>
+</div>
+<p>You are now in said REPL. Let's start by creating an array of <code>RANKS</code> and we will
+use the Ruby array shortcut to create <code>symbols</code>:</p><h3 id="representing-the-ranks">3.) Representing the RANKS</h3><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS = %i[ace two three four five six seven eight nine ten jack queen king]
+
+</pre>
+</div>
+<p>We can see that a <code>CONSTANT</code> was created with the 13 symbol values we wanted.</p><div class="note"><p>Throughout this lesson you should be entering the code into IRB. You aren't
+creating any Ruby files today, instead we will just run everything in the REPL, IRB.</p></div><div class="info"><p>When a constant or a symbol is created, they are only created <em>once</em> in
+memory. You can re-create a symbol value over and over, but in memory, it is
+always the same symbol. There can be only :one</p></div><p>Now that we have 13 <code>ranks</code> we need to represent the 4 <code>suits</code>:</p><h3 id="representing-the-suits">4.) Representing the SUITS</h3><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS = %i[ace two three four five six seven eight nine ten jack queen king]
+SUITS = %i[heart club diamond spade]
+
+</pre>
+</div>
+<p>Now I will show you two excellent methods to operate over an array. One is <code>map</code>
+and another is <code>flat_map</code>. They both work almost in the same manner, but
+<code>flat_map</code> additionally flattens one level of nesting.</p><h3 id="arrays-and-map">5.) Arrays and map</h3><p>A <code>map</code> is the process of starting with one collection of values, or an Array,
+then <code>iterating</code> over that list, and for every item in the original list, a new
+item will be created or transformed from the previous list. If you started with
+an array with 100 elements and you <code>map</code> it, you end up with a <code>new</code> array
+with 100 elements in it. An example:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+%w[bob jim sue janet tommy pat].map {|name| name.chars.count }
+
+=&gt; [3, 3, 3, 5, 5, 3]
+
+</pre>
+</div>
+<p>When you run that you can see that it returned a <em>new</em> array and instead of names
+we got the character counts instead. If the name on the current iteration is Bob,
+we end up with a 3 instead. You can also use map to transform the elements, ie:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+%w[bob jim sue janet tommy pat].map {|name| "#{name.capitalize} is awesome!" }
+
+=&gt; ["Bob is awesome!", "Jim is awesome!", "Sue is awesome!", "Janet is awesome!", "Tommy is awesome!", "Pat is awesome!"]
+
+</pre>
+</div>
+<p>This time instead of returning the character count for the name, we capitalized the
+first character, and then added "is awesome!" to the string. But let's get back to 
+our <em>Playing Card</em> example.</p><p>We will use our newly learned <code>map</code> method to generate 13 cards representing
+their ranks:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS = %i[ace two three four five six seven eight nine ten jack queen king]
+SUITS = %i[heart club diamond spade]
+
+RANKS.map {|rank| Card.new(rank) }
+
+</pre>
+</div>
+<h3 id="using-irb-to-test-drive">6.) Using IRB to "test drive"</h3><p>When you try and run that it is going to blow up. BOOM!</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS.map {|rank| Card.new(rank) }
+
+NameError: uninitialized constant Card
+
+</pre>
+</div>
+<p>The REPL is telling us we need to define the <code>Card</code> object, so let's get that done
+now. We will use a <code>Struct</code> which allows us to create a simple class that
+automatically adds any attributes it is initialized with. Here we set <code>Card</code> 
+to a new <code>Struct</code> and we tell <code>Struct</code> that it will have one attribute, <code>:rank</code>`.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Card = Struct.new(:rank)
+
+card = Card.new(:heart)
+=&gt; #&lt;struct Card rank=:heart&gt;
+
+card.rank
+=&gt; :heart
+
+</pre>
+</div>
+<h3 id="generating-52-cards">7.) Generating 52 cards</h3><p>Wow, that was easy! The <code>Struct</code> is a powerful, simple construct. Now that we have
+a <code>Card</code> object we can plug it into our code to create a deck:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS = %i[ace two three four five six seven eight nine ten jack queen king]
+SUITS = %i[heart club diamond spade]
+
+Card = Struct.new(:rank)
+RANKS.map {|rank| Card.new(rank) }
+
+=&gt; [#&lt;struct Card rank=:ace&gt;, #&lt;struct Card rank=:two&gt;, #&lt;struct Card rank=:three&gt;, #&lt;struct Card rank=:four&gt;, #&lt;struct Card rank=:five&gt;, #&lt;struct Card rank=:six&gt;, #&lt;struct Card rank=:seven&gt;, #&lt;struct Card rank=:eight&gt;, #&lt;struct Card rank=:nine&gt;, #&lt;struct Card rank=:ten&gt;, #&lt;struct Card rank=:jack&gt;, #&lt;struct Card rank=:queen&gt;, #&lt;struct Card rank=:king&gt;]
+
+</pre>
+</div>
+<p>How cool is that? We now have 13 cards and each has a rank A-2-K!</p><p>The last thing to do here is to represent the suits... REPRESENT! Sorry, couldn't resist.
+I must have typing tourettes. We can implement those pesky <code>:suits</code> using another map, but
+first we need to expand our <code>struct</code> to include the <code>suit</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Card = Struct.new(:rank, :suit)
+RANKS.map {|rank| SUITS.map {|suit| Card.new(rank, suit) } }
+
+=&gt; [[#&lt;struct Card rank=:ace, suit=:heart&gt;, #&lt;struct Card rank=:ace, suit=:club&gt;, #&lt;struct Card rank=:ace, suit=:diamond&gt;, #&lt;struct Card rank=:ace, suit=:spade&gt;], [#&lt;struct Card rank=:two, suit=:heart&gt;, #&lt;struct Card rank=:two, suit=:club&gt;, #&lt;struct Card rank=:two, suit=:diamond&gt;, #&lt;struct Card rank=:two, suit=:spade&gt;], [#&lt;struct Card rank=:three, suit=:heart&gt;, #&lt;struct Card rank=:three, suit=:club&gt;, #&lt;struct Card rank=:three, suit=:diamond&gt;, #&lt;struct Card rank=:three, suit=:spade&gt;], [#&lt;struct Card rank=:four, suit=:heart&gt;, #&lt;struct Card rank=:four, suit=:club&gt;, #&lt;struct Card rank=:four, suit=:diamond&gt;, #&lt;struct Card rank=:four, suit=:spade&gt;], [#&lt;struct Card rank=:five, suit=:heart&gt;, #&lt;struct Card rank=:five, suit=:club&gt;, #&lt;struct Card rank=:five, suit=:diamond&gt;, #&lt;struct Card rank=:five, suit=:spade&gt;], [#&lt;struct Card rank=:six, suit=:heart&gt;, #&lt;struct Card rank=:six, suit=:club&gt;, #&lt;struct Card rank=:six, suit=:diamond&gt;, #&lt;struct Card rank=:six, suit=:spade&gt;], [#&lt;struct Card rank=:seven, suit=:heart&gt;, #&lt;struct Card rank=:seven, suit=:club&gt;, #&lt;struct Card rank=:seven, suit=:diamond&gt;, #&lt;struct Card rank=:seven, suit=:spade&gt;], [#&lt;struct Card rank=:eight, suit=:heart&gt;, #&lt;struct Card rank=:eight, suit=:club&gt;, #&lt;struct Card rank=:eight, suit=:diamond&gt;, #&lt;struct Card rank=:eight, suit=:spade&gt;], [#&lt;struct Card rank=:nine, suit=:heart&gt;, #&lt;struct Card rank=:nine, suit=:club&gt;, #&lt;struct Card rank=:nine, suit=:diamond&gt;, #&lt;struct Card rank=:nine, suit=:spade&gt;], [#&lt;struct Card rank=:ten, suit=:heart&gt;, #&lt;struct Card rank=:ten, suit=:club&gt;, #&lt;struct Card rank=:ten, suit=:diamond&gt;, #&lt;struct Card rank=:ten, suit=:spade&gt;], [#&lt;struct Card rank=:jack, suit=:heart&gt;, #&lt;struct Card rank=:jack, suit=:club&gt;, #&lt;struct Card rank=:jack, suit=:diamond&gt;, #&lt;struct Card rank=:jack, suit=:spade&gt;], [#&lt;struct Card rank=:queen, suit=:heart&gt;, #&lt;struct Card rank=:queen, suit=:club&gt;, #&lt;struct Card rank=:queen, suit=:diamond&gt;, #&lt;struct Card rank=:queen, suit=:spade&gt;], [#&lt;struct Card rank=:king, suit=:heart&gt;, #&lt;struct Card rank=:king, suit=:club&gt;, #&lt;struct Card rank=:king, suit=:diamond&gt;, #&lt;struct Card rank=:king, suit=:spade&gt;]]
+
+</pre>
+</div>
+<h3 id="matrices-and-flat-map">8.) Matrices and flat_map</h3><p>Almost! But you may have noticed this is divided into ranks and suits, meaning each set
+of ranks for a suit are nested in an inside array and that is <em>not</em> what we want! We
+want a <em>single</em> list of 52 cards. Not 4 sets of 13.</p><p>Now we <em>could</em> use <code>flatten</code> at the end of that return, but that is sloppy, and I am
+just not into slop. Instead we will use the brother of <code>map</code>, <code>flat_map</code> which
+maps and collapses 1 level of nesting:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+RANKS.flat_map {|rank| SUITS.map {|suit| Card.new(rank, suit) } }
+
+=&gt; [#&lt;struct Card rank=:ace, suit=:heart&gt;, #&lt;struct Card rank=:ace, suit=:club&gt;, #&lt;struct Card rank=:ace, suit=:diamond&gt;, #&lt;struct Card rank=:ace, suit=:spade&gt;, #&lt;struct Card rank=:two, suit=:heart&gt;, #&lt;struct Card rank=:two, suit=:club&gt;, #&lt;struct Card rank=:two, suit=:diamond&gt;, #&lt;struct Card rank=:two, suit=:spade&gt;, #&lt;struct Card rank=:three, suit=:heart&gt;, #&lt;struct Card rank=:three, suit=:club&gt;, #&lt;struct Card rank=:three, suit=:diamond&gt;, #&lt;struct Card rank=:three, suit=:spade&gt;, #&lt;struct Card rank=:four, suit=:heart&gt;, #&lt;struct Card rank=:four, suit=:club&gt;, #&lt;struct Card rank=:four, suit=:diamond&gt;, #&lt;struct Card rank=:four, suit=:spade&gt;, #&lt;struct Card rank=:five, suit=:heart&gt;, #&lt;struct Card rank=:five, suit=:club&gt;, #&lt;struct Card rank=:five, suit=:diamond&gt;, #&lt;struct Card rank=:five, suit=:spade&gt;, #&lt;struct Card rank=:six, suit=:heart&gt;, #&lt;struct Card rank=:six, suit=:club&gt;, #&lt;struct Card rank=:six, suit=:diamond&gt;, #&lt;struct Card rank=:six, suit=:spade&gt;, #&lt;struct Card rank=:seven, suit=:heart&gt;, #&lt;struct Card rank=:seven, suit=:club&gt;, #&lt;struct Card rank=:seven, suit=:diamond&gt;, #&lt;struct Card rank=:seven, suit=:spade&gt;, #&lt;struct Card rank=:eight, suit=:heart&gt;, #&lt;struct Card rank=:eight, suit=:club&gt;, #&lt;struct Card rank=:eight, suit=:diamond&gt;, #&lt;struct Card rank=:eight, suit=:spade&gt;, #&lt;struct Card rank=:nine, suit=:heart&gt;, #&lt;struct Card rank=:nine, suit=:club&gt;, #&lt;struct Card rank=:nine, suit=:diamond&gt;, #&lt;struct Card rank=:nine, suit=:spade&gt;, #&lt;struct Card rank=:ten, suit=:heart&gt;, #&lt;struct Card rank=:ten, suit=:club&gt;, #&lt;struct Card rank=:ten, suit=:diamond&gt;, #&lt;struct Card rank=:ten, suit=:spade&gt;, #&lt;struct Card rank=:jack, suit=:heart&gt;, #&lt;struct Card rank=:jack, suit=:club&gt;, #&lt;struct Card rank=:jack, suit=:diamond&gt;, #&lt;struct Card rank=:jack, suit=:spade&gt;, #&lt;struct Card rank=:queen, suit=:heart&gt;, #&lt;struct Card rank=:queen, suit=:club&gt;, #&lt;struct Card rank=:queen, suit=:diamond&gt;, #&lt;struct Card rank=:queen, suit=:spade&gt;, #&lt;struct Card rank=:king, suit=:heart&gt;, #&lt;struct Card rank=:king, suit=:club&gt;, #&lt;struct Card rank=:king, suit=:diamond&gt;, #&lt;struct Card rank=:king, suit=:spade&gt;]
+
+</pre>
+</div>
+<h3 id="printing-the-card-value">9.) Printing the card value</h3><p>Now THAT is more like it! But are we done? Not really. If you have a single card there
+should be some way to get a string like "Ace of Spades". We can do that by overriding
+the built-in method <code>to_s</code>. But <em>why</em> override and use <code>to_s</code>?</p><p>In Ruby, we use methods like <code>to_s</code> or <code>to_i</code> or <code>to_a</code> in order to use
+one type as another, or in our world, to Duck-type it. Duck typing is a form of
+<code>polymorphism</code> which really just means you can ride a horse or a motorcycle but a
+horse isn't a motorcycle.</p><p>Essentially these methods are 'casting' methods that cast one type as another for the
+sake of output. ie:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+nil.to_a
+=&gt; []
+
+nil.to_s
+=&gt; ""
+
+nil.to_i
+=&gt; 0
+
+</pre>
+</div>
+<p>Since we want the <code>String</code> representation of a <code>Card</code>, it makes sense to just use the
+<code>to_s</code> method:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Card = Struct.new(:rank, :suit) do
+  def to_s
+    "#{rank.capitalize} of #{suit.capitalize}s"
+  end
+end
+
+Card.new(:ace, :heart).to_s
+
+=&gt; "Ace of Hearts"
+
+</pre>
+</div>
+<h3 id="make-it-a-value-object">10.) Make it a value object</h3><p>You might think we are done, but yet once again, we are not. Welcome to the life as a
+software developer. Just when you think you are done, you are totally <em>wrong</em>. I will
+demonstrate what the hell I am babbling about:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Card.new(:ace, :heart) == Card.new(:ace, :heart)
+
+=&gt; false
+
+</pre>
+</div>
+<p>False? But any Ace of Hearts should be the same as any other Ace of Hearts! My friends,
+you have stumbled on <em>object identity</em> which means that two objects held in memory
+are not always the same object. For instance:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+1 == 1
+
+=&gt; true
+
+"1" == "1"
+
+=&gt; false
+
+</pre>
+</div>
+<p>Why is <code>1 == 1</code> but <code>"1" != "1"</code>? Every object in memory has it's own
+<code>object_id</code> which is to say a unique identifier to determine when we are talking
+about the same object with two references, or two references to two objects:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+1.object_id
+
+=&gt; 3
+
+1.object_id == 1.object_id
+
+=&gt; true
+
+</pre>
+</div>
+<p>This is what is known as a <code>vaue object</code> meaning that when we compare it against
+another object we want to compare the <em>value</em> not the <em>object_id</em>. In the case
+of the number one they happen to be the same, but this is not always true. For
+instance:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+"foo" == "foo"
+
+=&gt; true
+
+"foo".object_id = 70151215874520
+"foo".object_id = 70151215860640
+
+</pre>
+</div>
+<p>WTF? "foo" is equal to "foo" but two different "foo"s have different object_ids?
+Well, yes. Each time you typed "foo" you got a <em>new</em> string. BUT, remember what I
+said about <code>value objects</code>? We aren't going to compare the <em>object_id</em> here, we
+are going to compare the <code>value</code>, thus it is a <code>value object</code>.</p><p>Now let's make our <code>Card</code> a value object:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Card = Struct.new(:rank, :suit) do
+  def ==(other)
+    self.rank == other.rank &amp;&amp;
+      self.suit == other.suit
+  end
+end
+
+Card.new(:ace, :heart) == Card.new(:ace, :heart)
+
+=&gt; true
+
+</pre>
+</div>
+<p>BEHOLD! A <code>value object</code>!</p><h3 id="shuffling-the-cards">11.) Shuffling the cards</h3><p>We are <em>done</em>, <em>finally</em>! But WAIT JIM! You cry. We cannot shuffle this deck of
+cards? Should I write my own <code>shuffle</code> method?</p><p>Absolutely not. You won't write an efficient shuffle anyway. It would be far
+better to lean on Ruby to do this for you. Luckily we chose to implement this
+collection of cards are an <code>Array</code> so we get to use methods from <code>Array</code>
+and <code>Enumberable</code>, and one of those super duper awesomesauce methods is
+<code>shuffle</code>!</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+deck = RANKS.flat_map {|rank| SUITS.map {|suit| Card.new(rank, suit) } }
+shuffled = deck.shuffle
+
+=&gt; [#&lt;struct Card rank=:jack, suit=:diamond&gt;, #&lt;struct Card rank=:jack, suit=:club&gt;, #&lt;struct Card rank=:ace, suit=:spade&gt;, #&lt;struct Card rank=:six, suit=:heart&gt;, #&lt;struct Card rank=:ten, suit=:diamond&gt;, #&lt;struct Card rank=:six, suit=:diamond&gt;, #&lt;struct Card rank=:two, suit=:diamond&gt;, #&lt;struct Card rank=:eight, suit=:club&gt;, #&lt;struct Card rank=:seven, suit=:diamond&gt;, #&lt;struct Card rank=:two, suit=:heart&gt;, #&lt;struct Card rank=:three, suit=:club&gt;, #&lt;struct Card rank=:six, suit=:club&gt;, #&lt;struct Card rank=:queen, suit=:spade&gt;, #&lt;struct Card rank=:jack, suit=:heart&gt;, #&lt;struct Card rank=:two, suit=:club&gt;, #&lt;struct Card rank=:king, suit=:club&gt;, #&lt;struct Card rank=:four, suit=:club&gt;, #&lt;struct Card rank=:three, suit=:spade&gt;, #&lt;struct Card rank=:six, suit=:spade&gt;, #&lt;struct Card rank=:king, suit=:spade&gt;, #&lt;struct Card rank=:ten, suit=:heart&gt;, #&lt;struct Card rank=:king, suit=:diamond&gt;, #&lt;struct Card rank=:three, suit=:diamond&gt;, #&lt;struct Card rank=:king, suit=:heart&gt;, #&lt;struct Card rank=:four, suit=:heart&gt;, #&lt;struct Card rank=:queen, suit=:diamond&gt;, #&lt;struct Card rank=:eight, suit=:spade&gt;, #&lt;struct Card rank=:five, suit=:heart&gt;, #&lt;struct Card rank=:two, suit=:spade&gt;, #&lt;struct Card rank=:ten, suit=:spade&gt;, #&lt;struct Card rank=:four, suit=:diamond&gt;, #&lt;struct Card rank=:jack, suit=:spade&gt;, #&lt;struct Card rank=:nine, suit=:spade&gt;, #&lt;struct Card rank=:seven, suit=:club&gt;, #&lt;struct Card rank=:eight, suit=:heart&gt;, #&lt;struct Card rank=:ace, suit=:club&gt;, #&lt;struct Card rank=:eight, suit=:diamond&gt;, #&lt;struct Card rank=:ten, suit=:club&gt;, #&lt;struct Card rank=:seven, suit=:heart&gt;, #&lt;struct Card rank=:three, suit=:heart&gt;, #&lt;struct Card rank=:nine, suit=:heart&gt;, #&lt;struct Card rank=:four, suit=:spade&gt;, #&lt;struct Card rank=:nine, suit=:diamond&gt;, #&lt;struct Card rank=:nine, suit=:club&gt;, #&lt;struct Card rank=:ace, suit=:heart&gt;, #&lt;struct Card rank=:five, suit=:spade&gt;, #&lt;struct Card rank=:ace, suit=:diamond&gt;, #&lt;struct Card rank=:seven, suit=:spade&gt;, #&lt;struct Card rank=:queen, suit=:heart&gt;, #&lt;struct Card rank=:five, suit=:diamond&gt;, #&lt;struct Card rank=:five, suit=:club&gt;, #&lt;struct Card rank=:queen, suit=:club&gt;]
+
+</pre>
+</div>
+<p>WHEW! I probably could go on and on with more things to do here, but I think
+this would make a great stopping point, and throwing too much shit at anything
+besides a monkey (He threw first!) isn't wise. Come to think of it, throwing
+shit at a creature strong enough to pull the ears off a Gundark isn't wise
+either.</p><p>Adios.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <center>(cc) - original code extracted from the excellent <a href="http://guides.rubyontails.com">Official Ruby on Rails Guides</a>
+and then rewritten from the ground up and rackified.</center>
+
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all();
+    $(guidesIndex.bind);
+  </script>
+</body>
+</html>
