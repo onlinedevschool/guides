@@ -1,0 +1,10 @@
+-
+  name: Games in Ruby
+  documents:
+    -
+      name: Build a deck of cards using IRB
+      url: build-a-deck-of-cards-using-irb.html
+      author: Jim OKelly
+      description: In order to build games like Poker and Blackjack you must
+                   first have a deck of cards. In this lesson you will learn
+                   about IRB as well as some great programming fundamentals!

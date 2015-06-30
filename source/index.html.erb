@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+RubyMentor Guides
+<% end %>
+
+<% content_for :header_section do %>
+<%= render 'motd' %>
+<% end %>
+
+<% documents_by_section.each do |section| %>
+  <h3><%= section['name'] %></h3>
+  <dl>
+    <% section['documents'].each do |document| %>
+      <%= guide(document['name'], document['url']) do %>
+        <p><%= document['description'] %></p>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>
