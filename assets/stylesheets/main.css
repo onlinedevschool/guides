@@ -302,7 +302,7 @@ li.more-info a {
 
 #footer {
   padding: 2em 0;
-  background: #222 url(../images/footer_tile.gif) repeat-x;
+  background: #222 url(../images/footer_tile.png) repeat-x;
 }
 #footer .wrapper {
   padding-left: 1em;
@@ -353,7 +353,7 @@ a, a:link, a:visited {
 }
 
 .guides-index .guides-index-item {
-  background: #053498 url(../images/nav_arrow.gif) no-repeat right top;
+  background: #053498  no-repeat right top;
   position: relative;
   z-index: 15;
   padding-bottom: 0.2em;
