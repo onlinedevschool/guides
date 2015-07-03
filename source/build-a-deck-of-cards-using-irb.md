@@ -3,7 +3,7 @@
 Building a Deck of Playing Cards in Ruby, the clean and easy way
 =================================================================
 
-In this video you will learn how to:
+In this guide you will learn how to:
 
   * Use IRB as an immediate feedback loop
   * Create symbol shortcut arrays
