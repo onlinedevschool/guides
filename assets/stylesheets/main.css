@@ -152,6 +152,10 @@ body {
   background: #222;
 }
 
+ul li.more-info-links {
+  display: inline;
+}
+
 .s-hidden {
   display: none;
 }
