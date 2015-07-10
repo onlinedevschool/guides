@@ -11,3 +11,4 @@ require 'action_pack'
 
 require "generator"
 Guides::Generator.new.generate
+`cp source/CNAME public/`
