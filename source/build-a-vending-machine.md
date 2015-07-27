@@ -126,13 +126,12 @@ VendingMachine.new("I am some argument to pass like wind").instance_method
 => I haz I am some argument to pass like wind!
 ```
 
-TIP: => is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that => thingy
+INFO: => is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that => thingy
 ```
 
 ## Back to that ```Hash``` business
 
 ```@items``` needs to be some kind of valid list of items the ```VendingMachine``` should vend. Let's create the *data store* using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.
-
 
 ```ruby
 items = {
@@ -156,6 +155,8 @@ VendingMachine.new({
   '003': 'Deez Nuts'
 })
 ```
+
+AD:
 
 ## An ```attr_reader```
 

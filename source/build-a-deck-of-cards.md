@@ -40,7 +40,7 @@ the top of the deck (Read), they then slide it to you (Evaluate), you read it
 NOTE: When you see ```$``` in grey sections, it  represents your 'prompt' and
 you shouldn't copy or paste it into the Terminal
 
-TIP: On OSX: press ```cmd-space``` and then start typing 'term' and hit enter when
+INFO: On OSX: press ```cmd-space``` and then start typing 'term' and hit enter when
 you see it match the icon.
 
 ```bash
@@ -62,7 +62,7 @@ We can see that a `CONSTANT` was created with the 13 symbol values we wanted.
 NOTE: Throughout this lesson you should be entering the code into IRB. You aren't
 creating any Ruby files today, instead we will just run everything in the REPL, IRB.
 
-TIP: When a constant or a symbol is created, they are only created _once_ in
+INFO: When a constant or a symbol is created, they are only created _once_ in
 memory. You can re-create a symbol value over and over, but in memory, it is
 always the same symbol. There can be only :one
 
@@ -225,6 +225,8 @@ Card.new(:ace, :heart).to_s
 
 => "Ace of Hearts"
 ```
+
+AD:
 
 ## Make it a value object
 
