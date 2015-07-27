@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Building a Vending Machine and learning programming along the way — Ruby on Rails Guides</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+
+  <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-M5VK7K"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M5VK7K');</script>
+  <!-- End Google Tag Manager -->
+
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">More from <a href="http://rubymentor.io?utm_campaign=empire&utm_medium=referral&utm_source=guides">RubyMentor</a>:</strong>
+      <ul class="more-info-links xs-hidden">
+        <li class="more-info"><a href="http://codementor.io/rubymentor?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Hourly Expert Ruby Mentorship">
+          Get Expert Help NOW</a></li>
+        <li class="more-info"><a href="http://rubymentor.io/plans?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Want a more personal and direct technology education?">
+          Monthly Mentorship Plans</a></li>
+        <li class="more-info"><a href="http://rubylive.tv?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Watch REAL Ruby get coded before your eyes!">
+          Watch Ruby coded LIVE!</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1 class="hidden-xs"><a href="index.html" title="Return to home page">homepage</a></h1>
+      <ul class="nav">
+        <li class="guides-index guides-index-large">
+          <a href="index.html" id="guidesMenu" class="guides-index-item nav-item">Guides Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Learn to program using Ruby</dt>
+                <dd><a href="build-a-vending-machine.html">Build a Vending Machine</a></dd>
+                <dd><a href="build-a-deck-of-cards.html">Build a deck of cards</a></dd>
+              </dl>
+              <dl class="R">
+              </dl>
+          </div>
+        </li>
+        <li class="hidden-xs">&nbsp;</li>
+        <li class="guides-index guides-index-small">
+          <select class="guides-index-item nav-item">
+            <option value="index.html">Guides Index</option>
+              <optgroup label="Learn to program using Ruby">
+                  <option value="build-a-vending-machine.html">Build a Vending Machine</option>
+                  <option value="build-a-deck-of-cards.html">Build a deck of cards</option>
+              </optgroup>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Building a Vending Machine and learning programming along the way</h2><p>This guide covers:</p>
+<ul>
+<li>Classes</li>
+<li>Hashes</li>
+<li>Arrays and Tuples</li>
+<li>Class initializers</li>
+<li>Instance Methods</li>
+<li>Instance Variables</li>
+<li>Local Variables</li>
+<li>Interfaces</li>
+<li>Encapsulation</li>
+</ul>
+
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.png" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li><a href="#a-love-affair-with-hash">A love affair with <code>Hash</code></a></li>
+<li><a href="#an-interface">An Interface</a></li>
+<li><a href="#building-a-drink-vending-machine">Building a Drink Vending Machine</a></li>
+<li><a href="#the-class">The <code>Class</code></a></li>
+<li><a href="#an-intializer">An Intializer</a></li>
+<li><a href="#instance-variables">Instance Variables</a></li>
+<li><a href="#back-to-that-hash-business">Back to that <code>Hash</code> business</a></li>
+<li><a href="#an-attr-reader">An <code>attr_reader</code></a></li>
+<li><a href="#encapsulation">Encapsulation</a></li>
+<li><a href="#an-instance-method">An Instance Method</a></li>
+<li><a href="#method-arguments">Method Arguments</a></li>
+<li><a href="#back-to-the-method-of-madness">Back to the method of madness</a></li>
+<li><a href="#an-array-and-a-tuple">An Array and a Tuple</a></li>
+<li><a href="#meet-the-conditional-if">Meet the <em>conditional</em>, <code>if</code></a></li>
+<li><a href="#transactions-logs-rock">Transactions logs rock</a></li>
+<li><a href="#methods-vs-functions">Methods vs Functions</a></li>
+</ol>
+
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="a-love-affair-with-hash">1.) A love affair with <code>Hash</code>
+</h3><p>A <code>Hash</code> is a Ruby <em>primative</em> or <em>built-in</em> <em>data type</em>. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.</p><p>A label for a <code>Hash</code> is a <em>key</em>. Hashes are <em>key value</em> <em>pairs</em>, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+{ '001': 'Newcastle Brown Ale' }
+
+</pre>
+</div>
+<h3 id="an-interface">2.) An Interface</h3><p>An interface is simply an aggreed form of communication, like English. Two people who speak English can <em>interface</em> with each other just fine, even if one is from Northern Ireland and one is from California... That would be an example of a sloppy iterface.</p><p>A strict, good interface would be two people closely related in interests, location, and beliefs and experiences as they would not use disperate words like <em>clink</em> to the California. Let's focus on this kind of interface.</p><h3 id="building-a-drink-vending-machine">3.) Building a Drink Vending Machine</h3><p>The best example of an interface is the Vending Machine, since it is ubiquitous and perfectly illustrates the mechanism. Here is the narrative:</p><p><em>begin narrative</em></p><p>You have a $1 bill in your pocket and you want a drink.</p><p>There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.</p><p>The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.</p><p>What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.</p><p>More noises can be heard from deep inside the mechanical if not tempermental devise. After a moment your drink appears and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.</p><p><em>end narrative</em></p><p>That is what we shall build, in Ruby.</p><h3 id="the-class">4.) The <code>Class</code>
+</h3><p>Ruby is an <em>object oriented</em> programming language, meaning we wrap data and methods inside of <em>objects</em>. Objects can be made from a <code>class</code> or a <code>module</code> in Ruby.</p><p>A <code>class</code> is the object creation mechanism of choice when you want to represent a <em>thing</em>. Since we are going to make a vending machine we will use the <code>class</code> construct to define it. A vending machine is indeed, a <em>thing</em>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+end
+
+</pre>
+</div>
+<h3 id="an-intializer">5.) An Intializer</h3><p>An initializer is used when we <em>create</em> and <em>object. Imagine we want to write some code that _uses</em> our new <code>VendingMachine</code> class:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+VendingMachine.new
+
+</pre>
+</div>
+<p>Here we used the <code>VendingMachine</code> class and immediately <em>called</em> the initializer <code>method</code> <em>new</em>. The <em>.</em> character is the <em>calling operator</em> in this context.</p><p>Usually if we want to <em>call a method</em> on an object we use the same name, ie:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+VendingMachine.new.vend
+
+</pre>
+</div>
+<p>Would match a method called <em>vend</em> on our object, but in the strange case of the initializer in Ruby, we <em>call</em> <em>new</em> and that translates to the following method:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+
+  def initialize
+  end
+end
+
+</pre>
+</div>
+<p>Notice we called <em>new</em> and we got <em>initialize</em>. It is always like this for classes and is because you are creating a <em>new VendingMachine</em> in object-orientated-programmer-speak.</p><p>*Initializers are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.</p><p>If we put those items directly inside our `<code>class</code> then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.</p><h3 id="instance-variables">6.) Instance Variables</h3><p>Instance variables are the mechanism for storing <em>data</em> on the objects. This is known as <em>state</em>. Objects have their own internal state. When <em>arguments</em> are passed to an <em>initializer</em> then they are typically set as <em>instance variables</em>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+
+  def initialize(items)
+    @items = items
+  end
+end
+
+</pre>
+</div>
+<p>The value came in as <code>items</code> and we <em>assigned</em> an <em>instance variable</em> called <code>@items</code> to those items. It is an <em>instance variable</em> because of the designating <em>@</em> character. Instance variables are said to <em>persist</em> meaning they stick around, and <em>instance methods</em> in the same object can access their values:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+
+  def initialize(items)
+    @items = items
+  end
+
+  def instance_method
+    "I haz #{@items}!"
+  end
+end
+
+
+VendingMachine.new("I am some argument to pass like wind").instance_method
+=&gt; I haz I am some argument to pass like wind!
+
+</pre>
+</div>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+=&gt; is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that =&gt; thingy
+
+</pre>
+</div>
+<h3 id="back-to-that-hash-business">7.) Back to that <code>Hash</code> business</h3><p><code>@items</code> needs to be some kind of valid list of items the <code>VendingMachine</code> should vend. Let's create the <em>data store</em> using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = {
+  '001': 'Cocoa Cola',
+  '002': 'Newcastle Brown Ale'
+}
+
+</pre>
+</div>
+<p>Now we can more sensibly construct our customizable object like so:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+VendingMachine.new( {{ '001': 'Cocoa Cola' }, { '002': 'Newcastle Brown Ale' }} )
+
+</pre>
+</div>
+<p>Now those items are in only the vending machine instance returned by the <code>VendingMachine.new</code> call. We could now make a different one that also sells deez nuts, because beer without nuts....</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+VendingMachine.new({
+  '001': 'Cocoa Cola', 
+  '002': 'Newcastle Brown Ale',
+  '003': 'Deez Nuts'
+})
+
+</pre>
+</div>
+<h3 id="an-attr-reader">8.) An <code>attr_reader</code>
+</h3><p>Are you ready to meet your first <em>macro</em>? Because here it be, the <code>attr_reader</code>.</p><p>By macro I mean this is <em>code that writes code</em>, but don't worry, it ain't no Terminator shit. Rather than ramble, behold! code:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+  # initializer hidden for brevity
+  attr_reader :items
+end
+
+class VendingMachine
+  # initializer hidden for brevity
+  def items
+    @items
+  end
+end
+
+</pre>
+</div>
+<p>These two classes have identical functionality. The <code>attr_reader</code> actually is a <em>macro</em> for the second example. When you use <code>attr_reader</code> what you get is the method <code>items</code> that just exposes the value at the <em>instance variable</em> <code>@items</code>.</p><h3 id="encapsulation">9.) Encapsulation</h3><p>However, exposing the items that were sent in via the initializer makes little sense when you consider encapsulation, one of the founding principles of Object Oriented Programming or OOP herewhence.</p><p>So I am going to leave the <code>attr_reader</code> but I am going to <em>encapsulate</em> it behind my object so it is not in view of the public. To do so I will use the class level modifier <code>private</code>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+
+  def initialize(items)
+    @items = items
+  end
+
+private
+
+  attr_reader :items
+end
+
+</pre>
+</div>
+<p>Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing <em>@</em> all the time is tiring. So by leaving this <code>attr_reader</code> in our class but making it private means our class can refer to <code>@items</code> through a method call <code>items</code> which isn't just about saving teh single character. It is about making all the the internal and external communication interface, <em>normalized</em> which just means <em>fuck the snowflakes</em>.</p><h3 id="an-instance-method">10.) An Instance Method</h3><p>It is time to be useful! Let's start making this shit do shit! We want our beer gawddammit. And we want it now!</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+  # initializer hidden for brevity
+
+  def vend(code, paid)
+  end
+end
+
+</pre>
+</div>
+<p>Now we will create a machine using some items and set it to a <em>local variable</em> so we have a <em>reference</em> to that created object. This allows us to create another vending machine and assign it to a different <em>local variable</em> so we have access to both.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+machine = VendingMachine.new({
+  '001': 'Cocoa Cola', 
+  '002': 'Newcastle Brown Ale',
+  '003': 'Deez Nuts'
+}
+machine.vend('001', 100)
+
+</pre>
+</div>
+<p>Nothing will happen yet for two reasons, one is our Hash doesn't know shit about a price, which we will need, and two, because the method I wrote has jack in it. If there is nothing in it, Ruby will return <code>nil</code>. In Ruby, <em>everything</em> returns the last expression, usually the last line of the method.</p><p>First let's add price to the Hash, which will require us to restructure it, also I am going to break it out of the method call into it's own <em>local variable</em>, <em>items</em>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = {
+  '001': { name: 'Cocoa Cola',          price: 80  },
+  '002': { name: 'Newcastle Brown Ale', price: 120 },
+  '003': { name: 'Deez Nuts',           price: 80  }
+}
+
+</pre>
+</div>
+<p>Notice we added an inner hash where the value used to just be a string, the name. Now name is inside of another Hash. And we added price as well. So you can read this as so:</p><p>The hash with the <em>key</em> of '001' has a <em>value</em> of another Hash and that one has a <em>key</em> called <em>name</em> that has the <em>value</em> of <em>'Cocoa Cola'</em> and a <em>price</em> that has the <em>value</em> of 80 cents. Simple!</p><p>Now we can deal with method arguments in this instance method...</p><h3 id="method-arguments">11.) Method Arguments</h3><p>Our instance method, <code>vend</code> takes two <em>arguments</em>, <em>code</em> and <em>paid</em>. Between the method and it's arguments you have now described, in code, what will happen when someone puts in some money and presses some buttons!</p><h3 id="back-to-the-method-of-madness">12.) Back to the method of madness</h3><p>The <code>vend</code> method is called like so:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+#items left out for brevity
+VendingMachine.new(items).vend('001', 100')
+
+</pre>
+</div>
+<p>The scenario is they put in $1 and then pressed 0 - 0 - 1. Now they are expecting their coke, but we didn't deliver it! The method is empty! Let's fix this before anyone else puts money in!</p><p>This is what the 'interface' looks like:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = {
+  '001': { name: 'Cocoa Cola',          price: 80  },
+  '002': { name: 'Newcastle Brown Ale', price: 120 },
+  '003': { name: 'Deez Nuts',           price: 80  }
+}
+
+v = VendingMachine.new(items)
+v.vend('001', 100)
+
+</pre>
+</div>
+<p>Now the code:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def vend(code, paid)
+  items[code.to_sym]
+end
+
+</pre>
+</div>
+<p>Now when we run the code we get the following behavior:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+v.vend('001', 100)
+=&gt; {:name=&gt;"Cocoa Cola", :price=&gt;80}
+
+</pre>
+</div>
+<p>So it returns the hash we wanted, but it didn't give the person their change! Call a nerd!</p><h3 id="an-array-and-a-tuple">13.) An Array and a Tuple</h3><p>Check this out... An <code>Array</code> is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].</p><p>Simple right? There are no keys, just values. This is what this method return... an <code>Array</code>, but WAIT THERE IS MORE!!</p><p>The <code>Array</code> we are going to return is a <em>Tuple</em>, which is a fancy way of saying this is an <code>Array</code>, but it is <em>ordered</em> meaning the index of each item in the list has meaning. If you sorted a tuple, you ruin the ability to make sense of it.</p><p>But enough mouthing... This is what it <em>should</em> return:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+v.vend('001', 100)
+=&gt; ["Cocoa Cola", 20]
+
+</pre>
+</div>
+<p>This represents that they get their Coke and also they get their cambio. We could have expressed it in a hash, but I think I said before I am a lazy bastard; if I can get away with a tuple, I will do it. I like tuples. I love the word. I love the simplicity. I am a tuplehead.</p><p>So how do we go from this hash return:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+{:name=&gt;"Cocoa Cola", :price=&gt;80}
+
+</pre>
+</div>
+<p>And instead get our tuple?</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+["Cocoa Cola", 20]
+
+</pre>
+</div>
+<p>Oh the fucking agany of it all!</p><p>But seriously, it isn't that hard because we are using Ruby. Ruby is great for lazy bastards like myself!</p><p>I have been omitting code left and right for brevity, but now I will give you what we have as a whole:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+  def initialize(items)
+    @items = items
+  end
+
+  def vend(code, paid)
+    item   = items[code.to_sym]
+    change = paid - item[:price].to_i
+
+    [item[:name], change]
+  end
+
+private
+
+  attr_reader :items
+end
+
+</pre>
+</div>
+<p>The method <code>vend</code> now sets a <em>local variable</em> to an <em>item</em> which is the hash it returned before. The next line creates a <em>local variable</em> and calculates the change deserved.</p><p>The last line of the method creates a new <code>Array</code>, our <em>tuple</em> with the <em>item name</em> and the <em>change</em>. Pretty straight-forward right? Well, sort of, but what if they put in less than the correct amount?</p><p>Let's try that:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = { '001': { name: 'Cocoa Cola', price: 80' } }
+v = VendingMachine.new(items)
+v.vend('001', 0)
+=&gt; ["Cocoa Cola", -80]
+
+</pre>
+</div>
+<h3 id="meet-the-conditional-if">14.) Meet the <em>conditional</em>, <code>if</code>
+</h3><p>We obviously don't want to vend anything if they didn't pay enough. So let's take the easy way out and add some <em>conditional logic</em> to the vend method. We will only return the item if they paid enough:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+  def vend(code, paid)
+    item   = items[code.to_sym]
+    change = paid - item[:price].to_i
+
+    if paid &gt;= item[:price].to_i
+      [item[:name], change]
+    else
+      [nil, paid, paid - item[:price].to_i]
+    end
+  end
+
+</pre>
+</div>
+<p><code>if</code> the <em>paid</em> variable is greater than or equal to the item price we vend and change, but if not, we send a tuple of 3 values, a nil for the item that wasn't paid for, a full refund, and a price difference to let them know how much more they need to depsit to get their item.</p><p>Let's try it out, let's pay 10 cents and expect a Coke:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = { '001': { name: 'Cocoa Cola', price: 80' } }
+v = VendingMachine.new(items)
+v.vend('001', 10)
+=&gt; [nil, 10, -70]
+
+</pre>
+</div>
+<h3 id="transactions-logs-rock">15.) Transactions logs rock</h3><p>As you can see, if we try to pay and we don't use enough money we are not vended the drink and we are refunded. If we send in enough money we are vended the drink and the change.</p><p>But the money that we were charged just goes into the void, which is not what the owner of said vending machine would want. We could add an <em>instance variable</em> like <code>@bank</code> and increment it when shit be vended, BUT there is a better way!</p><p>Instead of <em>mutating</em> a value with some increment, we will instead create a <em>transaction log</em> of monies made and change made; another <em>tuple</em>. It looks like this:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class VendingMachine
+
+  def initialize(items)
+    @items = items
+    @transactions = [] # We add an empty ```Array``` to store the transactions
+  end
+
+  def vend(code, paid)
+    item   = items[code.to_sym]
+    change = paid - item[:price].to_i
+    if change &gt;= 0
+      # Here we add the current successful vend to the
+      # transaction log
+      @transactions &lt;&lt; [ item[:price].to_i, change ]
+      [item[:name], change]
+    else
+      [nil, paid, change]
+    end
+  end
+
+private
+
+  attr_reader :items
+end
+
+</pre>
+</div>
+<p>Now that we are recording these transactions we can create another <em>instance method</em> that will return the amount of money the machine has, based on that transaction log. To be extra thourough and shit we will also add a method to calculate the amount of change made.</p><h3 id="methods-vs-functions">16.) Methods vs Functions</h3><p>Here is a great example to show the difference between functions and methods. Methods tend to <em>do stuff</em> while Functions are just <em>calculations</em>. Functions should not change any object state, they take some values as arguments, do some calculation, and then return that calculated value.</p><p>Functions are awesome, I am highly suspicious of most Methods...</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+class VendingMachine
+
+  ...
+
+  def profit
+    @transactions.reduce {|acc, t| acc + t[0] }
+  end
+
+  def changed
+    @transactions.reduce {|acc, t| acc + t[1] }
+  end
+
+  ...
+end
+
+</pre>
+</div>
+<p>And to test it out we can start up irb and load the file like so:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+irb -I"." -rfilename
+
+</pre>
+</div>
+<p>And then simulate some vends:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+items = { '001': { name: 'Beer', price: 80 }, '002': { name: 'Coke', price: 50 } }
+v = VendingMachine.new(items)
+5.times { v.vend( '001', 100 ) }
+
+v.income
+=&gt; 400
+
+v.changed
+=&gt; 100
+
+</pre>
+</div>
+<p>Pretty simple so far? Does your head hurt yet? Grab your lightsaber and head to the next section!</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <center>(cc) - original code extracted from the excellent <a href="http://guides.rubyontails.com">Official Ruby on Rails Guides</a>
+and then rewritten from the ground up and rackified.</center>
+
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all();
+    $(guidesIndex.bind);
+  </script>
+</body>
+</html>
