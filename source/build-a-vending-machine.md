@@ -17,6 +17,8 @@ This guide covers:
 
 --------------------------------------------------------------------------------
 
+NOTE: If you are easily offended by colorful words, go away. I don't want to hear you cry after you read this.
+
 ## A love affair with ```Hash```
 
 A ```Hash``` is a Ruby *primative* or _built-in_ *data type*. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.
@@ -31,25 +33,21 @@ A label for a ```Hash``` is a *key*. Hashes are *key value* _pairs_, meaning the
 
 An interface is simply an aggreed form of communication, like English. Two people who speak English can *interface* with each other just fine, even if one is from Northern Ireland and one is from California... That would be an example of a sloppy iterface.
 
-A strict, good interface would be two people closely related in interests, location, and beliefs and experiences as they would not use disperate words like _clink_ to the California. Let's focus on this kind of interface.
+A strict, good interface would be two people closely related in interests, location, and beliefs and experiences as they would not use disperate words like _clink_ to the Californian. Let's focus on this kind of interface.
 
 ## Building a Drink Vending Machine
 
 The best example of an interface is the Vending Machine, since it is ubiquitous and perfectly illustrates the mechanism. Here is the narrative:
 
-_begin narrative_
-
-You have a $1 bill in your pocket and you want a drink.
-
-There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.
-
-The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.
-
-What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.
-
-More noises can be heard from deep inside the mechanical if not tempermental devise. After a moment your drink appears and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.
-
-_end narrative_
+> You have a $1 bill in your pocket and you want a drink.
+> 
+> There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.
+> 
+> The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.
+> 
+> What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.
+> 
+> More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.
 
 That is what we shall build, in Ruby.
 
@@ -66,7 +64,7 @@ end
 
 ## An Intializer
 
-An initializer is used when we _create_ and _object. Imagine we want to write some code that _uses_ our new ```VendingMachine``` class:
+An initializer is used when we _create_ and _object_. Imagine we want to write some code that _uses_ our new ```VendingMachine``` class:
 
 ```ruby
 VendingMachine.new
@@ -92,7 +90,7 @@ end
 
 Notice we called _new_ and we got _initialize_. It is always like this for classes and is because you are creating a *new VendingMachine* in object-orientated-programmer-speak.
 
-*Initializers are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.
+*Initializers* are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.
 
 If we put those items directly inside our ```class`` then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.
 
@@ -124,13 +122,11 @@ class VendingMachine
   end
 end
 
-
 VendingMachine.new("I am some argument to pass like wind").instance_method
 => I haz I am some argument to pass like wind!
 ```
 
-```tip
-=> is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that => thingy
+TIP: => is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that => thingy
 ```
 
 ## Back to that ```Hash``` business
@@ -145,7 +141,7 @@ items = {
 }
 ```
 
-Now we can more sensibly construct our customizable object like so:
+We can now more sensibly construct our customizable object like so:
 
 ```ruby
 VendingMachine.new( {{ '001': 'Cocoa Cola' }, { '002': 'Newcastle Brown Ale' }} )
@@ -187,7 +183,7 @@ These two classes have identical functionality. The ```attr_reader``` actually i
 
 However, exposing the items that were sent in via the initializer makes little sense when you consider encapsulation, one of the founding principles of Object Oriented Programming or OOP herewhence.
 
-So I am going to leave the ```attr_reader``` but I am going to *encapsulate* it behind my object so it is not in view of the public. To do so I will use the class level modifier ```private```.
+So I am going to leave the ```attr_reader``` but I am going to *encapsulate* it inside my object so it is not in view of the public. To do so I will use the class level modifier ```private```.
 
 ```ruby
 class VendingMachine
@@ -203,6 +199,12 @@ end
 ```
 
 Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing *@* all the time is tiring. So by leaving this ```attr_reader``` in our class but making it private means our class can refer to ```@items``` through a method call ```items``` which isn't just about saving teh single character. It is about making all the the internal and external communication interface, *normalized* which just means _fuck the snowflakes_.
+
+In the words of Chuck:
+
+> You are not special. You're not a beautiful and unique snowflake. You're the same decaying organic matter as everything else. We're all part of the same compost heap. We're all singing, all dancing crap of the world.
+
+Yeah, fuck those snowflake mother fuckers!
 
 ## An Instance Method
 
@@ -282,6 +284,8 @@ def vend(code, paid)
 end
 ```
 
+What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the *key*. If they key is found the *value* of that key is retuned, if it is not found, then *nil* is returned.
+
 Now when we run the code we get the following behavior:
 
 ```ruby
@@ -293,7 +297,7 @@ So it returns the hash we wanted, but it didn't give the person their change! Ca
 
 ## An Array and a Tuple
 
-Check this out... An ```Array``` is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].
+An ```Array``` just is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].
 
 Simple right? There are no keys, just values. This is what this method return... an ```Array```, but WAIT THERE IS MORE!!
 
@@ -466,5 +470,5 @@ v.changed
 => 100
 ```
 
-Pretty simple so far? Does your head hurt yet? Grab your lightsaber and head to the next section!
+Pretty simple so far? Does your head hurt yet? Grab your lightsaber and head to the next section! (not written yet, use the force)
 
