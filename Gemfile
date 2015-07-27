@@ -11,6 +11,7 @@ gem 'actionpack'
 gem 'activesupport'
 gem 'redcarpet'
 gem 'w3c_validators'
+gem 'xml-sitemap'
 
 group :development do
   gem 'byebug'
