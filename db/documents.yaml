@@ -1,9 +1,17 @@
 -
-  name: Games in Ruby
+  name: Learn to program using Ruby
   documents:
     -
-      name: Build a deck of cards using IRB
-      url: build-a-deck-of-cards-using-irb.html
+      name: Build a Vending Machine
+      url: build-a-vending-machine.html
+      author: Jim OKelly
+      description: Learning Object Oriented programming isn't that hard,
+                   especially when you start with Ruby! In this lesson
+                   you will lay the ground work for a vending machine and
+                   by the end of it you will be vending beers like a champ!
+    -
+      name: Build a deck of cards
+      url: build-a-deck-of-cards.html
       author: Jim OKelly
       description: In order to build games like Poker and Blackjack you must
                    first have a deck of cards. In this lesson you will learn

@@ -1,4 +1,4 @@
-**DO NOT READ THIS FILE ON GITHUB, GUIDES ARE PUBLISHED ON http://video.rubymentor.io.**
+**DO NOT READ THIS FILE ON GITHUB, GUIDES ARE PUBLISHED ON http://guides.rubymentor.io.**
 
 Building a Deck of Playing Cards in Ruby, the clean and easy way
 =================================================================
