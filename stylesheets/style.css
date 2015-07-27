@@ -8,5 +8,6 @@ Import advanced style sheet
 
 @import url("reset.css");
 @import url("main.css");
+@import url("notice.css");
 @import url("syntaxhighlighter/shCore.css");
 @import url("syntaxhighlighter/shThemeFadeToGrey.css");
