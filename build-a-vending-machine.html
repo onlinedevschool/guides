@@ -114,14 +114,22 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        <h3 id="a-love-affair-with-hash">1.) A love affair with <code>Hash</code>
+        <div class="note"><p>If you are easily offended by colorful words, go away. I don't want to hear you cry after you read this.</p></div><h3 id="a-love-affair-with-hash">1.) A love affair with <code>Hash</code>
 </h3><p>A <code>Hash</code> is a Ruby <em>primative</em> or <em>built-in</em> <em>data type</em>. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.</p><p>A label for a <code>Hash</code> is a <em>key</em>. Hashes are <em>key value</em> <em>pairs</em>, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.</p><div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 { '001': 'Newcastle Brown Ale' }
 
 </pre>
 </div>
-<h3 id="an-interface">2.) An Interface</h3><p>An interface is simply an aggreed form of communication, like English. Two people who speak English can <em>interface</em> with each other just fine, even if one is from Northern Ireland and one is from California... That would be an example of a sloppy iterface.</p><p>A strict, good interface would be two people closely related in interests, location, and beliefs and experiences as they would not use disperate words like <em>clink</em> to the California. Let's focus on this kind of interface.</p><h3 id="building-a-drink-vending-machine">3.) Building a Drink Vending Machine</h3><p>The best example of an interface is the Vending Machine, since it is ubiquitous and perfectly illustrates the mechanism. Here is the narrative:</p><p><em>begin narrative</em></p><p>You have a $1 bill in your pocket and you want a drink.</p><p>There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.</p><p>The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.</p><p>What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.</p><p>More noises can be heard from deep inside the mechanical if not tempermental devise. After a moment your drink appears and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.</p><p><em>end narrative</em></p><p>That is what we shall build, in Ruby.</p><h3 id="the-class">4.) The <code>Class</code>
+<h3 id="an-interface">2.) An Interface</h3><p>An interface is simply an aggreed form of communication, like English. Two people who speak English can <em>interface</em> with each other just fine, even if one is from Northern Ireland and one is from California... That would be an example of a sloppy iterface.</p><p>A strict, good interface would be two people closely related in interests, location, and beliefs and experiences as they would not use disperate words like <em>clink</em> to the Californian. Let's focus on this kind of interface.</p><h3 id="building-a-drink-vending-machine">3.) Building a Drink Vending Machine</h3><p>The best example of an interface is the Vending Machine, since it is ubiquitous and perfectly illustrates the mechanism. Here is the narrative:</p>
+<blockquote>
+<p>You have a $1 bill in your pocket and you want a drink.</p>
+<p>There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.</p>
+<p>The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.</p>
+<p>What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.</p>
+<p>More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.</p>
+</blockquote>
+<p>That is what we shall build, in Ruby.</p><h3 id="the-class">4.) The <code>Class</code>
 </h3><p>Ruby is an <em>object oriented</em> programming language, meaning we wrap data and methods inside of <em>objects</em>. Objects can be made from a <code>class</code> or a <code>module</code> in Ruby.</p><p>A <code>class</code> is the object creation mechanism of choice when you want to represent a <em>thing</em>. Since we are going to make a vending machine we will use the <code>class</code> construct to define it. A vending machine is indeed, a <em>thing</em>.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
@@ -129,7 +137,7 @@ end
 
 </pre>
 </div>
-<h3 id="an-intializer">5.) An Intializer</h3><p>An initializer is used when we <em>create</em> and <em>object. Imagine we want to write some code that _uses</em> our new <code>VendingMachine</code> class:</p><div class="code_container">
+<h3 id="an-intializer">5.) An Intializer</h3><p>An initializer is used when we <em>create</em> and <em>object</em>. Imagine we want to write some code that <em>uses</em> our new <code>VendingMachine</code> class:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 VendingMachine.new
 
@@ -151,7 +159,7 @@ end
 
 </pre>
 </div>
-<p>Notice we called <em>new</em> and we got <em>initialize</em>. It is always like this for classes and is because you are creating a <em>new VendingMachine</em> in object-orientated-programmer-speak.</p><p>*Initializers are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.</p><p>If we put those items directly inside our `<code>class</code> then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.</p><h3 id="instance-variables">6.) Instance Variables</h3><p>Instance variables are the mechanism for storing <em>data</em> on the objects. This is known as <em>state</em>. Objects have their own internal state. When <em>arguments</em> are passed to an <em>initializer</em> then they are typically set as <em>instance variables</em>:</p><div class="code_container">
+<p>Notice we called <em>new</em> and we got <em>initialize</em>. It is always like this for classes and is because you are creating a <em>new VendingMachine</em> in object-orientated-programmer-speak.</p><p><em>Initializers</em> are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.</p><p>If we put those items directly inside our `<code>class</code> then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.</p><h3 id="instance-variables">6.) Instance Variables</h3><p>Instance variables are the mechanism for storing <em>data</em> on the objects. This is known as <em>state</em>. Objects have their own internal state. When <em>arguments</em> are passed to an <em>initializer</em> then they are typically set as <em>instance variables</em>:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
 
@@ -175,19 +183,13 @@ class VendingMachine
   end
 end
 
-
 VendingMachine.new("I am some argument to pass like wind").instance_method
 =&gt; I haz I am some argument to pass like wind!
 
 </pre>
 </div>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-=&gt; is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that =&gt; thingy
-
-</pre>
-</div>
-<h3 id="back-to-that-hash-business">7.) Back to that <code>Hash</code> business</h3><p><code>@items</code> needs to be some kind of valid list of items the <code>VendingMachine</code> should vend. Let's create the <em>data store</em> using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.</p><div class="code_container">
+<div class="info"><p>=&gt; is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that =&gt; thingy
+```</p></div><h3 id="back-to-that-hash-business">7.) Back to that <code>Hash</code> business</h3><p><code>@items</code> needs to be some kind of valid list of items the <code>VendingMachine</code> should vend. Let's create the <em>data store</em> using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 items = {
   '001': 'Cocoa Cola',
@@ -196,7 +198,7 @@ items = {
 
 </pre>
 </div>
-<p>Now we can more sensibly construct our customizable object like so:</p><div class="code_container">
+<p>We can now more sensibly construct our customizable object like so:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 VendingMachine.new( {{ '001': 'Cocoa Cola' }, { '002': 'Newcastle Brown Ale' }} )
 
@@ -229,7 +231,7 @@ end
 
 </pre>
 </div>
-<p>These two classes have identical functionality. The <code>attr_reader</code> actually is a <em>macro</em> for the second example. When you use <code>attr_reader</code> what you get is the method <code>items</code> that just exposes the value at the <em>instance variable</em> <code>@items</code>.</p><h3 id="encapsulation">9.) Encapsulation</h3><p>However, exposing the items that were sent in via the initializer makes little sense when you consider encapsulation, one of the founding principles of Object Oriented Programming or OOP herewhence.</p><p>So I am going to leave the <code>attr_reader</code> but I am going to <em>encapsulate</em> it behind my object so it is not in view of the public. To do so I will use the class level modifier <code>private</code>.</p><div class="code_container">
+<p>These two classes have identical functionality. The <code>attr_reader</code> actually is a <em>macro</em> for the second example. When you use <code>attr_reader</code> what you get is the method <code>items</code> that just exposes the value at the <em>instance variable</em> <code>@items</code>.</p><h3 id="encapsulation">9.) Encapsulation</h3><p>However, exposing the items that were sent in via the initializer makes little sense when you consider encapsulation, one of the founding principles of Object Oriented Programming or OOP herewhence.</p><p>So I am going to leave the <code>attr_reader</code> but I am going to <em>encapsulate</em> it inside my object so it is not in view of the public. To do so I will use the class level modifier <code>private</code>.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
 
@@ -244,7 +246,11 @@ end
 
 </pre>
 </div>
-<p>Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing <em>@</em> all the time is tiring. So by leaving this <code>attr_reader</code> in our class but making it private means our class can refer to <code>@items</code> through a method call <code>items</code> which isn't just about saving teh single character. It is about making all the the internal and external communication interface, <em>normalized</em> which just means <em>fuck the snowflakes</em>.</p><h3 id="an-instance-method">10.) An Instance Method</h3><p>It is time to be useful! Let's start making this shit do shit! We want our beer gawddammit. And we want it now!</p><div class="code_container">
+<p>Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing <em>@</em> all the time is tiring. So by leaving this <code>attr_reader</code> in our class but making it private means our class can refer to <code>@items</code> through a method call <code>items</code> which isn't just about saving teh single character. It is about making all the the internal and external communication interface, <em>normalized</em> which just means <em>fuck the snowflakes</em>.</p><p>In the words of Chuck:</p>
+<blockquote>
+<p>You are not special. You're not a beautiful and unique snowflake. You're the same decaying organic matter as everything else. We're all part of the same compost heap. We're all singing, all dancing crap of the world.</p>
+</blockquote>
+<p>Yeah, fuck those snowflake mother fuckers!</p><h3 id="an-instance-method">10.) An Instance Method</h3><p>It is time to be useful! Let's start making this shit do shit! We want our beer gawddammit. And we want it now!</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
   # initializer hidden for brevity
@@ -304,14 +310,14 @@ end
 
 </pre>
 </div>
-<p>Now when we run the code we get the following behavior:</p><div class="code_container">
+<p>What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the <em>key</em>. If they key is found the <em>value</em> of that key is retuned, if it is not found, then <em>nil</em> is returned.</p><p>Now when we run the code we get the following behavior:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 v.vend('001', 100)
 =&gt; {:name=&gt;"Cocoa Cola", :price=&gt;80}
 
 </pre>
 </div>
-<p>So it returns the hash we wanted, but it didn't give the person their change! Call a nerd!</p><h3 id="an-array-and-a-tuple">13.) An Array and a Tuple</h3><p>Check this out... An <code>Array</code> is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].</p><p>Simple right? There are no keys, just values. This is what this method return... an <code>Array</code>, but WAIT THERE IS MORE!!</p><p>The <code>Array</code> we are going to return is a <em>Tuple</em>, which is a fancy way of saying this is an <code>Array</code>, but it is <em>ordered</em> meaning the index of each item in the list has meaning. If you sorted a tuple, you ruin the ability to make sense of it.</p><p>But enough mouthing... This is what it <em>should</em> return:</p><div class="code_container">
+<p>So it returns the hash we wanted, but it didn't give the person their change! Call a nerd!</p><h3 id="an-array-and-a-tuple">13.) An Array and a Tuple</h3><p>An <code>Array</code> just is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].</p><p>Simple right? There are no keys, just values. This is what this method return... an <code>Array</code>, but WAIT THERE IS MORE!!</p><p>The <code>Array</code> we are going to return is a <em>Tuple</em>, which is a fancy way of saying this is an <code>Array</code>, but it is <em>ordered</em> meaning the index of each item in the list has meaning. If you sorted a tuple, you ruin the ability to make sense of it.</p><p>But enough mouthing... This is what it <em>should</em> return:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 v.vend('001', 100)
 =&gt; ["Cocoa Cola", 20]
@@ -453,7 +459,7 @@ v.changed
 
 </pre>
 </div>
-<p>Pretty simple so far? Does your head hurt yet? Grab your lightsaber and head to the next section!</p>
+<p>Pretty simple so far? Does your head hurt yet? Grab your lightsaber and head to the next section! (not written yet, use the force)</p>
       </div>
     </div>
   </div>
