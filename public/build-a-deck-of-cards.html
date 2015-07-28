@@ -119,8 +119,8 @@ should be writing in the first place.</p><p>But wait! What the hell is <code>REP
 </ul>
 <p>Imagine this, you are sitting at a card table. The Dealer pulls a card from
 the top of the deck (Read), they then slide it to you (Evaluate), you read it
-(Print), and then the game repeats (Loop).</p><p>NOTE: When you see <code>$</code> in grey sections, it  represents your 'prompt' and
-you shouldn't copy or paste it into the Terminal</p><div class="info"><p>On OSX: press <code>cmd-space</code> and then start typing 'term' and hit enter when
+(Print), and then the game repeats (Loop).</p><div class="note"><p>When you see <code>$</code> in grey sections, it  represents your 'prompt' and
+you shouldn't copy or paste it into the Terminal</p></div><div class="info"><p>On OSX: press <code>cmd-space</code> and then start typing 'term' and hit enter when
 you see it match the icon.</p></div><div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ irb
@@ -134,8 +134,8 @@ RANKS = %i[ace two three four five six seven eight nine ten jack queen king]
 
 </pre>
 </div>
-<p>We can see that a <code>CONSTANT</code> was created with the 13 symbol values we wanted.</p><p>NOTE: Throughout this lesson you should be entering the code into IRB. You aren't
-creating any Ruby files today, instead we will just run everything in the REPL, IRB.</p><div class="info"><p>When a constant or a symbol is created, they are only created <em>once</em> in
+<p>We can see that a <code>CONSTANT</code> was created with the 13 symbol values we wanted.</p><div class="note"><p>Throughout this lesson you should be entering the code into IRB. You aren't
+creating any Ruby files today, instead we will just run everything in the REPL, IRB.</p></div><div class="info"><p>When a constant or a symbol is created, they are only created <em>once</em> in
 memory. You can re-create a symbol value over and over, but in memory, it is
 always the same symbol. There can be only :one</p></div><p>Now that we have 13 <code>ranks</code> we need to represent the 4 <code>suits</code>:</p><h3 id="representing-the-suits">4.) Representing the SUITS</h3><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">

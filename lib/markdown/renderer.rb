@@ -24,7 +24,7 @@ HTML
       end
 
       def paragraph(text)
-        if text =~ /^(TIP|AD|WARNING|INFO|TODO)[.:]/
+        if text =~ /^(NOTE|AD|WARNING|INFO|TODO)[.:]/
           convert_notes(text)
         elsif text.include?('DO NOT READ THIS FILE ON GITHUB')
         elsif text =~ /^\[<sup>(\d+)\]:<\/sup> (.+)$/
@@ -67,7 +67,7 @@ HTML
           # if a bulleted list follows the first item is not rendered
           # as a list item, but as a paragraph starting with a plain
           # asterisk.
-          body.gsub(/^(AD|WARNING|INFO|TODO)[.:](.*?)(\n(?=\n)|\Z)/m) do
+          body.gsub(/^(NOTE|AD|WARNING|INFO|TODO)[.:](.*?)(\n(?=\n)|\Z)/m) do
             %(<div class="#{$1.downcase}"><p>#{$2.strip}</p></div>)
           end
         end

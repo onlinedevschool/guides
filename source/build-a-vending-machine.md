@@ -17,7 +17,7 @@ This guide covers:
 
 --------------------------------------------------------------------------------
 
-NOTE: If you are easily offended by colorful words, go away. I don't want to hear you cry after you read this.
+NOTE: I use foul lanuage as comic relief in this guide. If you are easily offended by words, perhaps you should read elsewhere. My words are not for the delicate and offended.
 
 ## A love affair with ```Hash```
 
