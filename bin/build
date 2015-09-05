@@ -11,4 +11,8 @@ require 'action_pack'
 
 require "generator"
 Guides::Generator.new.generate
-`cp source/CNAME public/`
+
+%w[CNAME favicon.ico].each do |f|
+  puts "copying #{f} from source to public"
+  `cp source/#{f} public/`
+end
