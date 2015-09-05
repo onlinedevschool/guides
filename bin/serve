@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+pwd = File.dirname(__FILE__)
+$:.unshift pwd
+$:.unshift "#{pwd}/../lib"
+
+require 'rubygems'
+require 'bundler/setup'
+require 'active_support'
+require 'action_pack'
+
+require "generator"
+Guides::Generator.new.generate
+`cp source/CNAME public/`
+`rackup`

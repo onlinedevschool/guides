@@ -113,6 +113,8 @@ body {
 }
 
 .red-button {
+  color: white !important;
+  text-decoration: none !important;
   display: inline-block;
   border-top: 1px solid rgba(255,255,255,.5);
   background: #751913;
@@ -262,11 +264,12 @@ li.more-info a {
   z-index: 99;
 }
 
-#feature {
+.feature {
   background: #d5e9f6 url(../images/feature_tile.gif) repeat-x;
   color: #333;
   padding: 0.5em 0 2em;
 }
+
 
 #container {
   color: #333;

@@ -7,6 +7,7 @@
 
 <title><%= yield(:page_title) || "TITLE" %></title>
 <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 <link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
 
@@ -26,56 +27,14 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 
   <div id="topNav">
     <div class="wrapper">
-      <strong class="more-info-label">More from <a href="http://rubymentor.io?utm_campaign=empire&utm_medium=referral&utm_source=guides">RubyMentor</a>:</strong>
+      <strong class="more-info-label">More from <a href="http://onlinedevschool.io?utm_campaign=empire&utm_medium=referral&utm_source=guides">OnlineDevSchool</a>:</strong>
       <ul class="more-info-links xs-hidden">
-        <li class="more-info"><a href="http://codementor.io/rubymentor?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Hourly Expert Ruby Mentorship">
-          Get Expert Help NOW</a></li>
-        <li class="more-info"><a href="http://rubymentor.io/plans?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Want a more personal and direct technology education?">
-          Monthly Mentorship Plans</a></li>
-        <li class="more-info"><a href="http://rubylive.tv?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Watch REAL Ruby get coded before your eyes!">
-          Watch Ruby coded LIVE!</a></li>
+        <li class="more-info"><a href="http://codementor.io/rubymentor?utm_campaign=empire&utm_medium=referral&utm_source=guides" alt="Hourly Expert Ruby on Rails Mentorship">
+          Need Ruby on Rails, Javascript or HTML/CSS Help? Hourly mentorship available</a></li>
       </ul>
     </div>
   </div>
-  <div id="header">
-    <div class="wrapper clearfix">
-      <h1 class="hidden-xs"><a href="index.html" title="Return to home page">homepage</a></h1>
-      <ul class="nav">
-        <li class="guides-index guides-index-large">
-          <a href="index.html" id="guidesMenu" class="guides-index-item nav-item">Guides Index</a>
-          <div id="guides" class="clearfix" style="display: none;">
-            <hr />
-            <% ['L', 'R'].each do |position| %>
-              <dl class="<%= position %>">
-              <% docs_for_menu(position).each do |section| %>
-                <dt><%= section['name'] %></dt>
-                <% finished_documents(section['documents']).each do |document| %>
-                <dd><a href="<%= document['url'] %>"><%= document['name'] %></a></dd>
-                <% end %>
-              <% end %>
-              </dl>
-            <% end %>
-          </div>
-        </li>
-        <li class="hidden-xs">&nbsp;</li>
-        <li class="guides-index guides-index-small">
-          <select class="guides-index-item nav-item">
-            <option value="index.html">Guides Index</option>
-            <% docs_for_menu.each do |section| %>
-              <optgroup label="<%= section['name'] %>">
-                <% finished_documents(section['documents']).each do |document| %>
-                  <option value="<%= document['url'] %>"><%= document['name'] %></option>
-                <% end %>
-              </optgroup>
-            <% end %>
-          </select>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <hr class="hide" />
-
-  <div id="feature">
+  <div class="feature">
     <div class="wrapper">
       <%= yield :header_section %>
 
@@ -90,6 +49,13 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       </div>
     </div>
   </div>
+
+  <div class="ods-ad">
+    <div class="wrapper">
+      <%= render 'ods' %>
+    </div>
+  </div>
+
 
   <hr class="hide" />
   <div id="footer">
