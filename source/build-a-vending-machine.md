@@ -17,11 +17,11 @@ This guide covers:
 
 --------------------------------------------------------------------------------
 
-NOTE: I use foul lanuage as comic relief in this guide. If you are easily offended by words, perhaps you should read elsewhere. My words are not for the delicate and offended.
+NOTE: I use foul language as comic relief in this guide. If you are easily offended by words, maybe save yourself the offense. It is meant for comic relief.
 
 ## A love affair with ```Hash```
 
-A ```Hash``` is a Ruby *primative* or _built-in_ *data type*. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.
+A ```Hash``` is a Ruby *primitive* or _built-in_ *data type*. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.
 
 A label for a ```Hash``` is a *key*. Hashes are *key value* _pairs_, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.
 
@@ -47,7 +47,7 @@ The best example of an interface is the Vending Machine, since it is ubiquitous 
 > 
 > What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.
 > 
-> More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.
+> More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small receptacle in the machine and retrieve your corn syrup poison drink.
 
 That is what we shall build, in Ruby.
 
@@ -285,7 +285,7 @@ def vend(code, paid)
 end
 ```
 
-What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the *key*. If they key is found the *value* of that key is retuned, if it is not found, then *nil* is returned.
+What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the *key*. If they key is found the *value* of that key is returned, if it is not found, then *nil* is returned.
 
 Now when we run the code we get the following behavior:
 
@@ -325,7 +325,7 @@ And instead get our tuple?
 ["Cocoa Cola", 20]
 ```
 
-Oh the fucking agany of it all!
+Oh the fucking agony of it all!
 
 But seriously, it isn't that hard because we are using Ruby. Ruby is great for lazy bastards like myself!
 
@@ -426,7 +426,7 @@ private
 end
 ```
 
-Now that we are recording these transactions we can create another *instance method* that will return the amount of money the machine has, based on that transaction log. To be extra thourough and shit we will also add a method to calculate the amount of change made.
+Now that we are recording these transactions we can create another *instance method* that will return the amount of money the machine has, based on that transaction log. To be extra thorough and shit we will also add a method to calculate the amount of change made.
 
 ## Methods vs Functions
 
