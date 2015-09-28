@@ -79,8 +79,8 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        <div class="note"><p>I use foul lanuage as comic relief in this guide. If you are easily offended by words, perhaps you should read elsewhere. My words are not for the delicate and offended.</p></div><h3 id="a-love-affair-with-hash">1.) A love affair with <code>Hash</code>
-</h3><p>A <code>Hash</code> is a Ruby <em>primative</em> or <em>built-in</em> <em>data type</em>. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.</p><p>A label for a <code>Hash</code> is a <em>key</em>. Hashes are <em>key value</em> <em>pairs</em>, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.</p><div class="code_container">
+        <div class="note"><p>I use foul language as comic relief in this guide. If you are easily offended by words, maybe save yourself the offense. It is meant for comic relief.</p></div><h3 id="a-love-affair-with-hash">1.) A love affair with <code>Hash</code>
+</h3><p>A <code>Hash</code> is a Ruby <em>primitive</em> or <em>built-in</em> <em>data type</em>. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.</p><p>A label for a <code>Hash</code> is a <em>key</em>. Hashes are <em>key value</em> <em>pairs</em>, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.</p><div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 { '001': 'Newcastle Brown Ale' }
 
@@ -92,7 +92,7 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 <p>There is a vending machine in front of you and it sells Coca Cola for 80 cents and Newcastle Brown Ale for $1.20. You insert your $1 bill.</p>
 <p>The vending machine makes some noise as it makes your bill vanish. You then scan the machine for signs of what it sells and how to buy that said shit.</p>
 <p>What you see are two large buttons, one for Coca Cola, one for Newcastle Brown Ale. You push the Coca Cola button as you are a broke ass bitch and got nada but a dollah.</p>
-<p>More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small recepticle in the machine and retrieve your corn syrup posion drink.</p>
+<p>More noises can be heard from deep inside the mechanical if not tempermental device. After a moment you hear a resounding THUD and you reach in a small receptacle in the machine and retrieve your corn syrup poison drink.</p>
 </blockquote>
 <p>That is what we shall build, in Ruby.</p><h3 id="the-class">4.) The <code>Class</code>
 </h3><p>Ruby is an <em>object oriented</em> programming language, meaning we wrap data and methods inside of <em>objects</em>. Objects can be made from a <code>class</code> or a <code>module</code> in Ruby.</p><p>A <code>class</code> is the object creation mechanism of choice when you want to represent a <em>thing</em>. Since we are going to make a vending machine we will use the <code>class</code> construct to define it. A vending machine is indeed, a <em>thing</em>.</p><div class="code_container">
@@ -275,7 +275,7 @@ end
 
 </pre>
 </div>
-<p>What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the <em>key</em>. If they key is found the <em>value</em> of that key is retuned, if it is not found, then <em>nil</em> is returned.</p><p>Now when we run the code we get the following behavior:</p><div class="code_container">
+<p>What I am doing here is passing the code (as a symbol) into the items hash, which is going to then use the code as the <em>key</em>. If they key is found the <em>value</em> of that key is returned, if it is not found, then <em>nil</em> is returned.</p><p>Now when we run the code we get the following behavior:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 v.vend('001', 100)
 =&gt; {:name=&gt;"Cocoa Cola", :price=&gt;80}
@@ -301,7 +301,7 @@ v.vend('001', 100)
 
 </pre>
 </div>
-<p>Oh the fucking agany of it all!</p><p>But seriously, it isn't that hard because we are using Ruby. Ruby is great for lazy bastards like myself!</p><p>I have been omitting code left and right for brevity, but now I will give you what we have as a whole:</p><div class="code_container">
+<p>Oh the fucking agony of it all!</p><p>But seriously, it isn't that hard because we are using Ruby. Ruby is great for lazy bastards like myself!</p><p>I have been omitting code left and right for brevity, but now I will give you what we have as a whole:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
   def initialize(items)
@@ -385,7 +385,7 @@ end
 
 </pre>
 </div>
-<p>Now that we are recording these transactions we can create another <em>instance method</em> that will return the amount of money the machine has, based on that transaction log. To be extra thourough and shit we will also add a method to calculate the amount of change made.</p><h3 id="methods-vs-functions">16.) Methods vs Functions</h3><p>Here is a great example to show the difference between functions and methods. Methods tend to <em>do stuff</em> while Functions are just <em>calculations</em>. Functions should not change any object state, they take some values as arguments, do some calculation, and then return that calculated value.</p><p>Functions are awesome, I am highly suspicious of most Methods...</p><div class="code_container">
+<p>Now that we are recording these transactions we can create another <em>instance method</em> that will return the amount of money the machine has, based on that transaction log. To be extra thorough and shit we will also add a method to calculate the amount of change made.</p><h3 id="methods-vs-functions">16.) Methods vs Functions</h3><p>Here is a great example to show the difference between functions and methods. Methods tend to <em>do stuff</em> while Functions are just <em>calculations</em>. Functions should not change any object state, they take some values as arguments, do some calculation, and then return that calculated value.</p><p>Functions are awesome, I am highly suspicious of most Methods...</p><div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 class VendingMachine
 

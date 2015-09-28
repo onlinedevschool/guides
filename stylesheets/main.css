@@ -285,11 +285,11 @@ li.more-info a {
   position: absolute;
   z-index: 0;
   top: 12em;
-  margin-right: 12em;
+  margin-right: 10em;
   right: 0;
   background: #FFF;
   padding: 1em 2em 1em 1.25em;
-  width: 17em;
+  width: 20em;
   font-size: 0.9285em;
   line-height: 1.3846em;
 }
