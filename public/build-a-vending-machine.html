@@ -124,7 +124,7 @@ end
 
 </pre>
 </div>
-<p>Notice we called <em>new</em> and we got <em>initialize</em>. It is always like this for classes and is because you are creating a <em>new VendingMachine</em> in object-orientated-programmer-speak.</p><p><em>Initializers</em> are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.</p><p>If we put those items directly inside our `<code>class</code> then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.</p><h3 id="instance-variables">6.) Instance Variables</h3><p>Instance variables are the mechanism for storing <em>data</em> on the objects. This is known as <em>state</em>. Objects have their own internal state. When <em>arguments</em> are passed to an <em>initializer</em> then they are typically set as <em>instance variables</em>:</p><div class="code_container">
+<p>Notice we called <em>new</em> and we got <em>initialize</em>. It is always like this for classes and is because you are creating a <em>new VendingMachine</em> in object-orientated-programmer-speak.</p><p><em>Initializers</em> are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.</p><p>If we put those items directly inside our <code>class</code> then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.</p><h3 id="instance-variables">6.) Instance Variables</h3><p>Instance variables are the mechanism for storing <em>data</em> on the objects. This is known as <em>state</em>. Objects have their own internal state. When <em>arguments</em> are passed to an <em>initializer</em> then they are typically set as <em>instance variables</em>:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
 
@@ -151,10 +151,11 @@ end
 VendingMachine.new("I am some argument to pass like wind").instance_method
 =&gt; I haz I am some argument to pass like wind!
 
+INFO: =&gt; is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that =&gt; thingy
+
 </pre>
 </div>
-<div class="info"><p>=&gt; is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that =&gt; thingy
-```</p></div><h3 id="back-to-that-hash-business">7.) Back to that <code>Hash</code> business</h3><p><code>@items</code> needs to be some kind of valid list of items the <code>VendingMachine</code> should vend. Let's create the <em>data store</em> using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.</p><div class="code_container">
+<h3 id="back-to-that-hash-business">7.) Back to that <code>Hash</code> business</h3><p><code>@items</code> needs to be some kind of valid list of items the <code>VendingMachine</code> should vend. Let's create the <em>data store</em> using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 items = {
   '001': 'Cocoa Cola',
@@ -165,16 +166,16 @@ items = {
 </div>
 <p>We can now more sensibly construct our customizable object like so:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-VendingMachine.new( {{ '001': 'Cocoa Cola' }, { '002': 'Newcastle Brown Ale' }} )
+VendingMachine.new( {{ '001' =&gt; 'Cocoa Cola' }, { '002' =&gt; 'Newcastle Brown Ale' }} )
 
 </pre>
 </div>
 <p>Now those items are in only the vending machine instance returned by the <code>VendingMachine.new</code> call. We could now make a different one that also sells deez nuts, because beer without nuts....</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 VendingMachine.new({
-  '001': 'Cocoa Cola', 
-  '002': 'Newcastle Brown Ale',
-  '003': 'Deez Nuts'
+  '001' =&gt; 'Cocoa Cola', 
+  '002' =&gt; 'Newcastle Brown Ale',
+  '003' =&gt; 'Deez Nuts'
 })
 
 </pre>
@@ -229,9 +230,9 @@ end
 <p>Now we will create a machine using some items and set it to a <em>local variable</em> so we have a <em>reference</em> to that created object. This allows us to create another vending machine and assign it to a different <em>local variable</em> so we have access to both.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 machine = VendingMachine.new({
-  '001': 'Cocoa Cola', 
-  '002': 'Newcastle Brown Ale',
-  '003': 'Deez Nuts'
+  '001' =&gt; 'Cocoa Cola', 
+  '002' =&gt; 'Newcastle Brown Ale',
+  '003' =&gt; 'Deez Nuts'
 }
 machine.vend('001', 100)
 
@@ -240,9 +241,9 @@ machine.vend('001', 100)
 <p>Nothing will happen yet for two reasons, one is our Hash doesn't know shit about a price, which we will need, and two, because the method I wrote has jack in it. If there is nothing in it, Ruby will return <code>nil</code>. In Ruby, <em>everything</em> returns the last expression, usually the last line of the method.</p><p>First let's add price to the Hash, which will require us to restructure it, also I am going to break it out of the method call into it's own <em>local variable</em>, <em>items</em>.</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 items = {
-  '001': { name: 'Cocoa Cola',          price: 80  },
-  '002': { name: 'Newcastle Brown Ale', price: 120 },
-  '003': { name: 'Deez Nuts',           price: 80  }
+  '001' =&gt; { name: 'Cocoa Cola',          price: 80  },
+  '002' =&gt; { name: 'Newcastle Brown Ale', price: 120 },
+  '003' =&gt; { name: 'Deez Nuts',           price: 80  }
 }
 
 </pre>
@@ -257,9 +258,9 @@ VendingMachine.new(items).vend('001', 100')
 <p>The scenario is they put in $1 and then pressed 0 - 0 - 1. Now they are expecting their coke, but we didn't deliver it! The method is empty! Let's fix this before anyone else puts money in!</p><p>This is what the 'interface' looks like:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 items = {
-  '001': { name: 'Cocoa Cola',          price: 80  },
-  '002': { name: 'Newcastle Brown Ale', price: 120 },
-  '003': { name: 'Deez Nuts',           price: 80  }
+  '001' =&gt; { name: 'Cocoa Cola',          price: 80  },
+  '002' =&gt; { name: 'Newcastle Brown Ale', price: 120 },
+  '003' =&gt; { name: 'Deez Nuts',           price: 80  }
 }
 
 v = VendingMachine.new(items)
@@ -324,7 +325,7 @@ end
 </div>
 <p>The method <code>vend</code> now sets a <em>local variable</em> to an <em>item</em> which is the hash it returned before. The next line creates a <em>local variable</em> and calculates the change deserved.</p><p>The last line of the method creates a new <code>Array</code>, our <em>tuple</em> with the <em>item name</em> and the <em>change</em>. Pretty straight-forward right? Well, sort of, but what if they put in less than the correct amount?</p><p>Let's try that:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-items = { '001': { name: 'Cocoa Cola', price: 80' } }
+items = { '001' =&gt; { name: 'Cocoa Cola', price: 80' } }
 v = VendingMachine.new(items)
 v.vend('001', 0)
 =&gt; ["Cocoa Cola", -80]
@@ -349,7 +350,7 @@ v.vend('001', 0)
 </div>
 <p><code>if</code> the <em>paid</em> variable is greater than or equal to the item price we vend and change, but if not, we send a tuple of 3 values, a nil for the item that wasn't paid for, a full refund, and a price difference to let them know how much more they need to depsit to get their item.</p><p>Let's try it out, let's pay 10 cents and expect a Coke:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-items = { '001': { name: 'Cocoa Cola', price: 80' } }
+items = { '001' =&gt; { name: 'Cocoa Cola', price: 80' } }
 v = VendingMachine.new(items)
 v.vend('001', 10)
 =&gt; [nil, 10, -70]
@@ -362,7 +363,7 @@ class VendingMachine
 
   def initialize(items)
     @items = items
-    @transactions = [] # We add an empty ```Array``` to store the transactions
+    @transactions = [] # We add an empty `Array` to store the transactions
   end
 
   def vend(code, paid)
@@ -386,17 +387,17 @@ end
 </pre>
 </div>
 <p>Now that we are recording these transactions we can create another <em>instance method</em> that will return the amount of money the machine has, based on that transaction log. To be extra thorough and shit we will also add a method to calculate the amount of change made.</p><h3 id="methods-vs-functions">16.) Methods vs Functions</h3><p>Here is a great example to show the difference between functions and methods. Methods tend to <em>do stuff</em> while Functions are just <em>calculations</em>. Functions should not change any object state, they take some values as arguments, do some calculation, and then return that calculated value.</p><p>Functions are awesome, I am highly suspicious of most Methods...</p><div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
+<pre class="brush: ruby; gutter: false; toolbar: false">
 class VendingMachine
 
   ...
 
   def profit
-    @transactions.reduce {|acc, t| acc + t[0] }
+    @transactions.reduce(0) {|acc, t| acc + t[0] }
   end
 
   def changed
-    @transactions.reduce {|acc, t| acc + t[1] }
+    @transactions.reduce(0) {|acc, t| acc + t[1] }
   end
 
   ...
@@ -412,7 +413,7 @@ irb -I"." -rfilename
 </div>
 <p>And then simulate some vends:</p><div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-items = { '001': { name: 'Beer', price: 80 }, '002': { name: 'Coke', price: 50 } }
+items = { '001' =&gt; { name: 'Beer', price: 80 }, '002' =&gt; { name: 'Coke', price: 50 } }
 v = VendingMachine.new(items)
 5.times { v.vend( '001', 100 ) }
 

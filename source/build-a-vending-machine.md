@@ -19,11 +19,11 @@ This guide covers:
 
 NOTE: I use foul language as comic relief in this guide. If you are easily offended by words, maybe save yourself the offense. It is meant for comic relief.
 
-## A love affair with ```Hash```
+## A love affair with `Hash`
 
-A ```Hash``` is a Ruby *primitive* or _built-in_ *data type*. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.
+A `Hash` is a Ruby *primitive* or _built-in_ *data type*. It also happens to be a storage mechanism. Think of it like boxes of shit with labels. Labelling two boxes with the same label removes the usefulness of the label, the same is true in hashes.
 
-A label for a ```Hash``` is a *key*. Hashes are *key value* _pairs_, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.
+A label for a `Hash` is a *key*. Hashes are *key value* _pairs_, meaning the are build from keys (labels) and values (the shit in your labeled boxes). The labels are unique, but the shit in the boxes doesn't have to be.
 
 ```ruby```
 { '001': 'Newcastle Brown Ale' }
@@ -53,9 +53,9 @@ That is what we shall build, in Ruby.
 
 ## The `Class`
 
-Ruby is an _object oriented_ programming language, meaning we wrap data and methods inside of *objects*. Objects can be made from a ```class``` or a ```module``` in Ruby.
+Ruby is an _object oriented_ programming language, meaning we wrap data and methods inside of *objects*. Objects can be made from a `class` or a `module` in Ruby.
 
-A ```class``` is the object creation mechanism of choice when you want to represent a _thing_. Since we are going to make a vending machine we will use the ```class``` construct to define it. A vending machine is indeed, a _thing_.
+A `class` is the object creation mechanism of choice when you want to represent a _thing_. Since we are going to make a vending machine we will use the `class` construct to define it. A vending machine is indeed, a _thing_.
 
 ```ruby
 class VendingMachine
@@ -64,13 +64,13 @@ end
 
 ## An Intializer
 
-An initializer is used when we _create_ and _object_. Imagine we want to write some code that _uses_ our new ```VendingMachine``` class:
+An initializer is used when we _create_ and _object_. Imagine we want to write some code that _uses_ our new `VendingMachine` class:
 
 ```ruby
 VendingMachine.new
 ```
 
-Here we used the ```VendingMachine``` class and immediately *called* the initializer ```method``` *new*. The *.* character is the _calling operator_ in this context.
+Here we used the `VendingMachine` class and immediately *called* the initializer `method` *new*. The *.* character is the _calling operator_ in this context.
 
 Usually if we want to *call a method* on an object we use the same name, ie:
 
@@ -92,7 +92,7 @@ Notice we called _new_ and we got _initialize_. It is always like this for class
 
 *Initializers* are for setting some initial state in the object you want to create. Maybe the object requires something to come to life, like a file path, or in our case, a list of items the machine should sell.
 
-If we put those items directly inside our ```class`` then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.
+If we put those items directly inside our `class` then the class would become severely limited in it's ability to be customized, and you know, every one wants to customize shit.
 
 ## Instance Variables
 
@@ -107,7 +107,7 @@ class VendingMachine
 end
 ```
 
-The value came in as ```items``` and we *assigned* an *instance variable* called ```@items``` to those items. It is an *instance variable* because of the designating *@* character. Instance variables are said to *persist* meaning they stick around, and *instance methods* in the same object can access their values:
+The value came in as `items` and we *assigned* an *instance variable* called `@items` to those items. It is an *instance variable* because of the designating *@* character. Instance variables are said to *persist* meaning they stick around, and *instance methods* in the same object can access their values:
 
 
 ```ruby
@@ -124,14 +124,13 @@ end
 
 VendingMachine.new("I am some argument to pass like wind").instance_method
 => I haz I am some argument to pass like wind!
-```
 
 INFO: => is a character meaning Ruby returned from the previous command you gave it and the value is displayed after that => thingy
 ```
 
-## Back to that ```Hash``` business
+## Back to that `Hash` business
 
-```@items``` needs to be some kind of valid list of items the ```VendingMachine``` should vend. Let's create the *data store* using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.
+`@items` needs to be some kind of valid list of items the `VendingMachine` should vend. Let's create the *data store* using a Hash. Hashes have to have a unique key and so we are using keys that could be found on a number pad.
 
 ```ruby
 items = {
@@ -143,24 +142,24 @@ items = {
 We can now more sensibly construct our customizable object like so:
 
 ```ruby
-VendingMachine.new( {{ '001': 'Cocoa Cola' }, { '002': 'Newcastle Brown Ale' }} )
+VendingMachine.new( {{ '001' => 'Cocoa Cola' }, { '002' => 'Newcastle Brown Ale' }} )
 ```
 
-Now those items are in only the vending machine instance returned by the ```VendingMachine.new``` call. We could now make a different one that also sells deez nuts, because beer without nuts....
+Now those items are in only the vending machine instance returned by the `VendingMachine.new` call. We could now make a different one that also sells deez nuts, because beer without nuts....
 
 ```ruby
 VendingMachine.new({
-  '001': 'Cocoa Cola', 
-  '002': 'Newcastle Brown Ale',
-  '003': 'Deez Nuts'
+  '001' => 'Cocoa Cola', 
+  '002' => 'Newcastle Brown Ale',
+  '003' => 'Deez Nuts'
 })
 ```
 
 AD:
 
-## An ```attr_reader```
+## An `attr_reader`
 
-Are you ready to meet your first *macro*? Because here it be, the ```attr_reader```.
+Are you ready to meet your first *macro*? Because here it be, the `attr_reader`.
 
 By macro I mean this is *code that writes code*, but don't worry, it ain't no Terminator shit. Rather than ramble, behold! code:
 
@@ -178,13 +177,13 @@ class VendingMachine
 end
 ```
 
-These two classes have identical functionality. The ```attr_reader``` actually is a *macro* for the second example. When you use ```attr_reader``` what you get is the method ```items``` that just exposes the value at the *instance variable* ```@items```.
+These two classes have identical functionality. The `attr_reader` actually is a *macro* for the second example. When you use `attr_reader` what you get is the method `items` that just exposes the value at the *instance variable* `@items`.
 
 ## Encapsulation
 
 However, exposing the items that were sent in via the initializer makes little sense when you consider encapsulation, one of the founding principles of Object Oriented Programming or OOP herewhence.
 
-So I am going to leave the ```attr_reader``` but I am going to *encapsulate* it inside my object so it is not in view of the public. To do so I will use the class level modifier ```private```.
+So I am going to leave the `attr_reader` but I am going to *encapsulate* it inside my object so it is not in view of the public. To do so I will use the class level modifier `private`.
 
 ```ruby
 class VendingMachine
@@ -199,7 +198,7 @@ private
 end
 ```
 
-Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing *@* all the time is tiring. So by leaving this ```attr_reader``` in our class but making it private means our class can refer to ```@items``` through a method call ```items``` which isn't just about saving teh single character. It is about making all the the internal and external communication interface, *normalized* which just means _fuck the snowflakes_.
+Why even put the reader in if I am only going to then hide it? Isn't that a bit dickteasish? The long and short of that would be, no. It is indeed useful, because I am a lazy bastard and constantly typing *@* all the time is tiring. So by leaving this `attr_reader` in our class but making it private means our class can refer to `@items` through a method call `items` which isn't just about saving teh single character. It is about making all the the internal and external communication interface, *normalized* which just means _fuck the snowflakes_.
 
 In the words of Chuck:
 
@@ -224,22 +223,22 @@ Now we will create a machine using some items and set it to a *local variable* s
 
 ```ruby
 machine = VendingMachine.new({
-  '001': 'Cocoa Cola', 
-  '002': 'Newcastle Brown Ale',
-  '003': 'Deez Nuts'
+  '001' => 'Cocoa Cola', 
+  '002' => 'Newcastle Brown Ale',
+  '003' => 'Deez Nuts'
 }
 machine.vend('001', 100)
 ```
 
-Nothing will happen yet for two reasons, one is our Hash doesn't know shit about a price, which we will need, and two, because the method I wrote has jack in it. If there is nothing in it, Ruby will return ```nil```. In Ruby, _everything_ returns the last expression, usually the last line of the method.
+Nothing will happen yet for two reasons, one is our Hash doesn't know shit about a price, which we will need, and two, because the method I wrote has jack in it. If there is nothing in it, Ruby will return `nil`. In Ruby, _everything_ returns the last expression, usually the last line of the method.
 
 First let's add price to the Hash, which will require us to restructure it, also I am going to break it out of the method call into it's own *local variable*, *items*.
 
 ```ruby
 items = {
-  '001': { name: 'Cocoa Cola',          price: 80  },
-  '002': { name: 'Newcastle Brown Ale', price: 120 },
-  '003': { name: 'Deez Nuts',           price: 80  }
+  '001' => { name: 'Cocoa Cola',          price: 80  },
+  '002' => { name: 'Newcastle Brown Ale', price: 120 },
+  '003' => { name: 'Deez Nuts',           price: 80  }
 }
 ```
 
@@ -251,11 +250,11 @@ Now we can deal with method arguments in this instance method...
 
 ## Method Arguments
 
-Our instance method, ```vend``` takes two *arguments*, _code_ and _paid_. Between the method and it's arguments you have now described, in code, what will happen when someone puts in some money and presses some buttons!
+Our instance method, `vend` takes two *arguments*, _code_ and _paid_. Between the method and it's arguments you have now described, in code, what will happen when someone puts in some money and presses some buttons!
 
 ## Back to the method of madness
 
-The ```vend``` method is called like so:
+The `vend` method is called like so:
 
 ```ruby
 #items left out for brevity
@@ -268,9 +267,9 @@ This is what the 'interface' looks like:
 
 ```ruby
 items = {
-  '001': { name: 'Cocoa Cola',          price: 80  },
-  '002': { name: 'Newcastle Brown Ale', price: 120 },
-  '003': { name: 'Deez Nuts',           price: 80  }
+  '001' => { name: 'Cocoa Cola',          price: 80  },
+  '002' => { name: 'Newcastle Brown Ale', price: 120 },
+  '003' => { name: 'Deez Nuts',           price: 80  }
 }
 
 v = VendingMachine.new(items)
@@ -298,11 +297,11 @@ So it returns the hash we wanted, but it didn't give the person their change! Ca
 
 ## An Array and a Tuple
 
-An ```Array``` just is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].
+An `Array` just is a list of values... [1, 2, 3, 4, 5], ["tom", "dick", "harriet"].
 
-Simple right? There are no keys, just values. This is what this method return... an ```Array```, but WAIT THERE IS MORE!!
+Simple right? There are no keys, just values. This is what this method return... an `Array`, but WAIT THERE IS MORE!!
 
-The ```Array``` we are going to return is a *Tuple*, which is a fancy way of saying this is an ```Array```, but it is _ordered_ meaning the index of each item in the list has meaning. If you sorted a tuple, you ruin the ability to make sense of it.
+The `Array` we are going to return is a *Tuple*, which is a fancy way of saying this is an `Array`, but it is _ordered_ meaning the index of each item in the list has meaning. If you sorted a tuple, you ruin the ability to make sense of it.
 
 But enough mouthing... This is what it _should_ return:
 
@@ -350,20 +349,20 @@ private
 end
 ```
 
-The method ```vend``` now sets a *local variable* to an _item_ which is the hash it returned before. The next line creates a *local variable* and calculates the change deserved.
+The method `vend` now sets a *local variable* to an _item_ which is the hash it returned before. The next line creates a *local variable* and calculates the change deserved.
 
-The last line of the method creates a new ```Array```, our *tuple* with the _item name_ and the _change_. Pretty straight-forward right? Well, sort of, but what if they put in less than the correct amount?
+The last line of the method creates a new `Array`, our *tuple* with the _item name_ and the _change_. Pretty straight-forward right? Well, sort of, but what if they put in less than the correct amount?
 
 Let's try that:
 
 ```ruby
-items = { '001': { name: 'Cocoa Cola', price: 80' } }
+items = { '001' => { name: 'Cocoa Cola', price: 80' } }
 v = VendingMachine.new(items)
 v.vend('001', 0)
 => ["Cocoa Cola", -80]
 ```
 
-## Meet the *conditional*, ```if```
+## Meet the *conditional*, `if`
 
 We obviously don't want to vend anything if they didn't pay enough. So let's take the easy way out and add some *conditional logic* to the vend method. We will only return the item if they paid enough:
 
@@ -380,12 +379,12 @@ We obviously don't want to vend anything if they didn't pay enough. So let's tak
   end
 ```
 
-```if``` the _paid_ variable is greater than or equal to the item price we vend and change, but if not, we send a tuple of 3 values, a nil for the item that wasn't paid for, a full refund, and a price difference to let them know how much more they need to depsit to get their item.
+`if` the _paid_ variable is greater than or equal to the item price we vend and change, but if not, we send a tuple of 3 values, a nil for the item that wasn't paid for, a full refund, and a price difference to let them know how much more they need to depsit to get their item.
 
 Let's try it out, let's pay 10 cents and expect a Coke:
 
 ```ruby
-items = { '001': { name: 'Cocoa Cola', price: 80' } }
+items = { '001' => { name: 'Cocoa Cola', price: 80' } }
 v = VendingMachine.new(items)
 v.vend('001', 10)
 => [nil, 10, -70]
@@ -395,7 +394,7 @@ v.vend('001', 10)
 
 As you can see, if we try to pay and we don't use enough money we are not vended the drink and we are refunded. If we send in enough money we are vended the drink and the change.
 
-But the money that we were charged just goes into the void, which is not what the owner of said vending machine would want. We could add an *instance variable* like ```@bank``` and increment it when shit be vended, BUT there is a better way!
+But the money that we were charged just goes into the void, which is not what the owner of said vending machine would want. We could add an *instance variable* like `@bank` and increment it when shit be vended, BUT there is a better way!
 
 Instead of *mutating* a value with some increment, we will instead create a *transaction log* of monies made and change made; another *tuple*. It looks like this:
 
@@ -404,7 +403,7 @@ class VendingMachine
 
   def initialize(items)
     @items = items
-    @transactions = [] # We add an empty ```Array``` to store the transactions
+    @transactions = [] # We add an empty `Array` to store the transactions
   end
 
   def vend(code, paid)
@@ -434,17 +433,17 @@ Here is a great example to show the difference between functions and methods. Me
 
 Functions are awesome, I am highly suspicious of most Methods...
 
-```Ruby
+``` ruby
 class VendingMachine
 
   ...
 
   def profit
-    @transactions.reduce {|acc, t| acc + t[0] }
+    @transactions.reduce(0) {|acc, t| acc + t[0] }
   end
 
   def changed
-    @transactions.reduce {|acc, t| acc + t[1] }
+    @transactions.reduce(0) {|acc, t| acc + t[1] }
   end
 
   ...
@@ -460,7 +459,7 @@ irb -I"." -rfilename
 And then simulate some vends:
 
 ```ruby
-items = { '001': { name: 'Beer', price: 80 }, '002': { name: 'Coke', price: 50 } }
+items = { '001' => { name: 'Beer', price: 80 }, '002' => { name: 'Coke', price: 50 } }
 v = VendingMachine.new(items)
 5.times { v.vend( '001', 100 ) }
 
